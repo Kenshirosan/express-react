@@ -26,3 +26,8 @@
 18. Installer concurrently : `npm i -D concurrently`.
 19. On écrit les scripts pour que concurrently fonctionne.
 20. Penser à la clé proxy dans package.json du client (app react).
+    
+## Créer le repo
+
+21. Créer un README.md bien précis et documenté.
+22. Créer un repo git et l'envoyer sur github. (Choix URL : git@github.com:<userName>/<repoName>.git)
