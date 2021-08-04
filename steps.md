@@ -41,6 +41,7 @@
 25. `npm i bcryptjs`
 26. Gérer les mots de passe avec les méthodes **salt, hash et compare**
 
+---
 
 # Créer une base de données mongoDB
 1. Ouvrir Compass.
