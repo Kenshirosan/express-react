@@ -42,7 +42,7 @@
 26. Gérer les mots de passe avec les méthodes **salt, hash et compare**
 
 
-## Créer une base de données mongoDB
+# Créer une base de données mongoDB
 1. Ouvrir Compass.
 2. On crée un base de données plus une collection.
 3. On switch sur la nouvelle base de données avec `mongoSH` (le terminal en bas dans compass) : `use <dbName>`
