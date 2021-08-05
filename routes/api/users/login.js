@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
@@ -16,17 +17,49 @@ router.post('/', async (req, res) => {
             throw new Error('Le login a raté');
         }
 
-        // Vérifier que le mot de passe qu'on a reçu dans req.body.password soit compatible avec le mot de passe de passe chiffré de la base de données
+        // Vérifier que le mot de passe qu'on a reçu dans req.body.password soit compatible avec le mot de passe de passe chiffré de la base de données.
         // bcryptjs
         if (await bcrypt.compare(password, user.password)) {
-            return res
-                .status(200)
-                .json({ msg: 'Vous êtes maintenant connecté ! 🎆', user });
+            // Créer un JWT
+
+            let payload = {
+                user: {
+                    id: user.id,
+                },
+            };
+
+            jwt.sign(
+                payload,
+                process.env.APP_SECRET,
+                { expiresIn: 3600 },
+                function (err, token) {
+                    if (err) throw err;
+                    res.status(200).json({
+                        msg: 'Vous êtes maintenant connecté ! 🎆',
+                        token,
+                    });
+                }
+            );
+        }
+    } catch (error) {
+        let messages = [];
+
+        if (error.message) {
+            messages.push(error.message);
         }
 
-        throw new Error('Le login a raté');
-    } catch (error) {
-        res.status(500).json({ err: error.message });
+        // Si on a des erreurs de mongodb :
+        if (error.errors) {
+            for (let item in error.errors) {
+                messages.push(error.errors[item]['message']);
+            }
+        }
+        // Si on a d'autres erreurs :
+        if (error.custom) {
+            messages.push(error.message);
+        }
+
+        res.status(500).json({ err: messages });
     }
 });
 

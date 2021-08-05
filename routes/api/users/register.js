@@ -24,9 +24,15 @@ router.post('/', async (req, res) => {
 
         await user.save();
 
+        // Envoie de mail de confirmation de email addresse
+
         res.status(201).json({ msg: 'Votre compte a été créé ! 🎆' });
     } catch (error) {
         let messages = [];
+
+        if (error.message && error.keyValue) {
+            messages.push(error.message);
+        }
 
         // Si on a des erreurs de mongodb :
         if (error.errors) {
@@ -36,6 +42,7 @@ router.post('/', async (req, res) => {
         }
         // Si on a d'autres erreurs :
         if (error.custom) {
+            console.log('ok');
             messages.push(error.message);
         }
 

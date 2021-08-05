@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Notification from '../layouts/pageComponents/Notification';
 import LinkBack from '../layouts/pageComponents/LinkBack';
-import { validateEmail } from '../utilities';
+import { validateEmail, fetchData } from '../../utilities';
 
 const Register = () => {
     // Un State pour le formulaire.
@@ -22,7 +22,7 @@ const Register = () => {
     };
 
     // Créer un objet contact et l'enregistrer dans localStorage.
-    const onSubmitHandler = e => {
+    const onSubmitHandler = async e => {
         e.preventDefault();
 
         const { email, password, password2 } = formData;
@@ -34,35 +34,14 @@ const Register = () => {
             return maybeNotify('Formulaire invalide', 'alert-danger');
         }
 
-        localStorage.setItem('contact', JSON.stringify(formData));
+        const data = await fetchData('/api/users/register', formData, 'POST');
 
-        fetch('/api/users/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                if (data.err) {
-                    // throw : Envoie une exception : coupe l'exécution du code
-                    throw new Error(data.err);
-                }
+        if (data.msg) {
+            setMessage(data.msg);
+            return maybeNotify(data.msg, 'alert-success');
+        }
 
-                setMessage(data.msg);
-            })
-            .catch(err => {
-                // On remet la string dans un tableau
-                let message = err.message.split(',');
-
-                message = message.join('<br>');
-
-                maybeNotify(message, 'alert-danger', 10000);
-            });
-
-        // Quand le contact est enregistré : afficher une notification.
-        maybeNotify(message, 'alert-success');
+        return maybeNotify(data, 'alert-danger');
     };
 
     const maybeNotify = (mess, level, timeout = 5000) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Notification from '../layouts/pageComponents/Notification';
 import LinkBack from '../layouts/pageComponents/LinkBack';
-import { validateEmail } from '../utilities';
+import { validateEmail, fetchData } from '../../utilities';
 
 const Login = () => {
     // Un State pour le formulaire.
@@ -19,7 +19,7 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const onSubmitHandler = e => {
+    const onSubmitHandler = async e => {
         e.preventDefault();
 
         const { email } = formData;
@@ -31,51 +31,30 @@ const Login = () => {
             return maybeNotify('Formulaire invalide', 'alert-danger');
         }
 
-        // enregistrer formData dans localStorage.
         // Envoie sur le serveur
-        //
-        localStorage.setItem('contact', JSON.stringify(formData));
 
-        fetch('/api/users/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                if (data.err) {
-                    // throw : Envoie une exception : coupe l'exécution du code
-                    throw new Error(data.err);
-                }
+        const data = await fetchData('/api/users/login', formData, 'POST');
 
-                setMessage(data.msg);
-            })
-            .catch(err => {
-                // On remet la string dans un tableau
-                let message = err.message.split(',');
+        if (data.msg) {
+            setMessage(data.msg);
 
-                message = message.join('<br>');
+            localStorage.setItem('token', data.token);
 
-                maybeNotify(message, 'alert-danger', 10000);
-            });
+            return maybeNotify(data.msg, 'alert-success');
+        }
 
-        e.target.reset();
-
-        // Quand le contact est enregistré : afficher une notification.
-        maybeNotify('Votre compte a été créé !', 'alert-success');
+        return maybeNotify(data, 'alert-danger');
     };
 
-    const maybeNotify = (mess, level) => {
+    function maybeNotify(mess, level, timeout = 5000) {
         setNotify(true);
         setMessage(mess);
         setLevel(level);
         setTimeout(() => {
             setNotify(false);
             setMessage('');
-        }, 5000);
-    };
+        }, timeout);
+    }
 
     return (
         <article className="container mt-5">
