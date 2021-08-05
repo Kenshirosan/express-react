@@ -17,9 +17,9 @@ module.exports = async function (req, res, next) {
         // On ajoute l'utilisateur à la requête
         req.user = decoded.user;
 
-        // On laisse la requête originale continué
+        // On laisse la requête originale continuée
         next();
     } catch (e) {
-        return res.status(401).json({ msg: 'Requête interdite' });
+        return res.status(401).json({ err: 'Requête interdite' });
     }
 };

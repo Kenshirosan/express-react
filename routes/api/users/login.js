@@ -19,7 +19,10 @@ router.post('/', async (req, res) => {
 
         // Vérifier que le mot de passe qu'on a reçu dans req.body.password soit compatible avec le mot de passe de passe chiffré de la base de données.
         // bcryptjs
-        if (await bcrypt.compare(password, user.password)) {
+
+        const checked = await bcrypt.compare(password, user.password);
+
+        if (checked) {
             // Créer un JWT
             let payload = {
                 user: {
@@ -27,20 +30,21 @@ router.post('/', async (req, res) => {
                 },
             };
 
-            jwt.sign(
+            return jwt.sign(
                 payload,
                 process.env.APP_SECRET,
-                { expiresIn: -1 }, // Validité du token en seconde || -1 pour validité infinie
+                { expiresIn: 3600 }, // Validité du token en seconde || -1 pour validité infinie
                 function (err, token) {
                     if (err) throw err;
 
-                    res.status(200).json({
+                    return res.status(200).json({
                         msg: 'Vous êtes maintenant connecté ! 🎆',
                         token,
                     });
                 }
             );
         }
+        throw new Error('Vérifiez votre mot de passe');
     } catch (error) {
         let messages = [];
 
