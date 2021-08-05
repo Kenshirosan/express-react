@@ -1,0 +1,61 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "description": "mise en place du serveur pour le blog",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "client": "npm start --prefix react-blog",
+        "watch": "concurrently \"npm run dev\" \"npm run client\""
+    },
+    "author": "Laurent",
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.13.5"
+    },
+    "devDependencies": {
+        "concurrently": "^6.2.0",
+        "nodemon": "^2.0.12"
+    },
+    "prettier": {
+        "printWidth": 90,
+        "tabWidth": 4,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "overrides": [
+            {
+                "files": "*.vue",
+                "options": {
+                    "parser": "vue",
+                    "vueIndentScriptAndStyle": true
+                }
+            },
+            {
+                "files": "*.js",
+                "options": {
+                    "parser": "babel"
+                }
+            },
+            {
+                "files": "*.json",
+                "options": {
+                    "parser": "json"
+                }
+            }
+        ],
+        "semi": true,
+        "requirePragma": false,
+        "proseWrap": "preserve",
+        "arrowParens": "avoid",
+        "htmlWhitespaceSensitivity": "css",
+        "quoteProps": "as-needed"
+    }
+}

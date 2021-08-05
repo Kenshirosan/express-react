@@ -40,6 +40,10 @@ const Login = () => {
 
             localStorage.setItem('token', data.token);
 
+            setTimeout(function () {
+                window.location = '/';
+            }, 3000);
+
             return maybeNotify(data.msg, 'alert-success');
         }
 

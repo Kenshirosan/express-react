@@ -7,9 +7,11 @@ function validateEmail(email) {
 
 async function fetchData(url, body = null, method = 'GET') {
     let headers = new Headers();
+    headers.set('Content-Type', 'application/json');
 
-    if (method === 'POST') {
-        headers.set('Content-Type', 'application/json');
+    // Si on a un JWT dans localStorage, on l'envoie avec la requête.
+    if (localStorage.getItem('token')) {
+        headers.set('x-auth-token', localStorage.getItem('token'));
     }
 
     const options = {

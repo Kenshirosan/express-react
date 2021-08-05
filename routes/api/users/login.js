@@ -21,7 +21,6 @@ router.post('/', async (req, res) => {
         // bcryptjs
         if (await bcrypt.compare(password, user.password)) {
             // Créer un JWT
-
             let payload = {
                 user: {
                     id: user.id,
@@ -31,9 +30,10 @@ router.post('/', async (req, res) => {
             jwt.sign(
                 payload,
                 process.env.APP_SECRET,
-                { expiresIn: 3600 },
+                { expiresIn: -1 }, // Validité du token en seconde || -1 pour validité infinie
                 function (err, token) {
                     if (err) throw err;
+
                     res.status(200).json({
                         msg: 'Vous êtes maintenant connecté ! 🎆',
                         token,
