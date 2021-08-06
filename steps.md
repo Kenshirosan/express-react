@@ -41,12 +41,22 @@
 25. `npm i bcryptjs`
 26. Gérer les mots de passe avec les méthodes **salt, hash et compare**
 
+
+# Création des JSONWEBTOKEN
+1. `npm install jsonwebtoken`.
+2. Création d'un token : On a besoin de quelques infos de l'utilisateur : payload.
+    1. Importer jwt.
+    2. La méthode : jwt.sign(payload, expiresAt, callback(err, token));
+3. Vérification de la validité du token dans un middleware.
+    1. jwt.verify(token, secretKey);
+    2. Cette méthode décode le token et permet d'accéder aux informations contenues dans le token.
+
 ---
 
 # Créer une base de données mongoDB
 1. Ouvrir Compass.
 2. On crée un base de données plus une collection.
-3. On switch sur la nouvelle base de données avec `mongoSH` (le terminal en bas dans compass) : `use <dbName>`
+3. On switch sur la nouvelle base de données avec `mongoSH` (le terminal en bas dans compass) : `use <dbName>`.
 4. Vous exécutez la command `db.createUser({ <options> })`.
 5. Vous redémarrez Compass.
 6. On teste la string de connexion dans Compass : `mongodb://<user>:<password>@localhost:27017/<dbName>`

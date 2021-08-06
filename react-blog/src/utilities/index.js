@@ -15,8 +15,8 @@ async function fetchData(url, body = null, method = 'GET') {
     }
 
     const options = {
-        method: method,
-        headers: headers,
+        method,
+        headers,
     };
 
     if (body !== null) {

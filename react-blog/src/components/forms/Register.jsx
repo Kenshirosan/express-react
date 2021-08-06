@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Notification from '../layouts/pageComponents/Notification';
 import LinkBack from '../layouts/pageComponents/LinkBack';
 import { validateEmail, fetchData } from '../../utilities';

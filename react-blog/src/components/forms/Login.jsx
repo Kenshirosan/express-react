@@ -20,7 +20,7 @@ const Login = () => {
     };
 
     const onSubmitHandler = async e => {
-        e.preventDefault();
+        // e.preventDefault();
 
         const { email } = formData;
 

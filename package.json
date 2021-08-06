@@ -11,7 +11,7 @@
         "watch": "concurrently \"npm run dev\" \"npm run client\""
     },
     "author": "Laurent",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "dotenv": "^10.0.0",
