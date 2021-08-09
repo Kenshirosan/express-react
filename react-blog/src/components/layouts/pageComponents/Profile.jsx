@@ -1,6 +1,26 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 const Profile = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        avatar: '',
+        password: '',
+    });
+
+    // Récupérer les données des inputs
+    const onChangeHandler = e => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const loadImage = e => {
+        console.log(e);
+    };
+
+    // Envoyer le formulaire dans la base de données
+
+    const { name, email, avatar, password } = formData;
+
     return (
         <Fragment>
             <h2>Vos informations :</h2>
@@ -14,6 +34,7 @@ const Profile = () => {
                         name="name"
                         className="form-control"
                         id="name"
+                        onChange={onChangeHandler}
                     />
                 </div>
                 <div className="mb-3 col-md-4">
@@ -25,6 +46,7 @@ const Profile = () => {
                         name="avatar"
                         className="form-control"
                         id="name"
+                        onChange={loadImage}
                     />
                 </div>
                 <div className="mb-3 col-md-4">
@@ -38,6 +60,7 @@ const Profile = () => {
                         id="email"
                         autoComplete="off"
                         aria-describedby="emailHelp"
+                        onChange={onChangeHandler}
                     />
                     <div id="emailHelp" className="form-text">
                         We'll never share your email with anyone else.
@@ -53,6 +76,7 @@ const Profile = () => {
                         className="form-control"
                         id="password"
                         autoComplete="off"
+                        onChange={onChangeHandler}
                     />
                 </div>
 
