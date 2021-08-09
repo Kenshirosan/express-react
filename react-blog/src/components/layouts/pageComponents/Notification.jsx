@@ -23,7 +23,7 @@ Notification.propTypes = {
 
 const style = {
     position: 'fixed',
-    top: '25px',
+    top: '75px',
     right: '25px',
     padding: '1em',
 };

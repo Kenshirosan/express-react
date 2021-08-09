@@ -21,7 +21,7 @@ router.post('/', auth, async (req, res) => {
         user.updatedAt = new Date();
         await user.save();
 
-        res.json({ msg: 'Message depuis le fichier update' });
+        res.json({ msg: 'Update successful !', user });
     } catch (e) {
         res.status(500).json({ msg: "Un erreur s'est produite !" });
     }

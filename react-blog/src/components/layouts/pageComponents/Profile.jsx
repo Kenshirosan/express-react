@@ -1,13 +1,43 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { fetchData } from '../../../utilities';
+import Notification from './Notification';
 
 function Profile() {
+    const [user, setUser] = useState({});
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         avatar: '',
-        password: '',
     });
+
+    // State pour notifications
+    const [notify, setNotify] = useState(false);
+    const [message, setMessage] = useState('');
+    const [level, setLevel] = useState('alert-success');
+
+    function maybeNotify(mess, level, timeout = 5000) {
+        setNotify(true);
+        setMessage(mess);
+        setLevel(level);
+        setTimeout(() => {
+            setNotify(false);
+            setMessage('');
+        }, timeout);
+    }
+
+    useEffect(() => {
+        fetchData('/api/users/currentUser').then(data => updateState(data));
+    }, []);
+
+    function updateState(data) {
+        setUser(data.user);
+        setFormData({
+            name: data.user.name,
+            email: data.user.email,
+            avatar: data.user.avatar,
+        });
+    }
 
     // Récupérer les données des inputs
     function onChangeHandler(e) {
@@ -27,82 +57,145 @@ function Profile() {
     }
 
     // Envoyer le formulaire dans la base de données
-    async function onSubmitHandler(e) {
+    function onSubmitHandler(e) {
         e.preventDefault();
 
         // Faire fetch ici : URL : /api/users/update
-        const response = fetchData('/api/users/update', formData, 'POST');
+        fetchData('/api/users/update', formData, 'POST').then(data => {
+            updateState(data);
+
+            return maybeNotify(data.msg, 'alert-success');
+        });
 
         // Si erreur de token : On fait un logout et on redirige vers la page /login
-        console.log(response);
     }
 
-    const { name, email, avatar, password } = formData;
+    function deleteUser(e) {
+        e.preventDefault();
+
+        // Demandez confirmation ?
+        if (window.confirm('Etes vous sur ?? 😢')) {
+            // Effacer
+            fetchData('/api/users/destroy', null, 'POST').then(data => {
+                maybeNotify(data.msg, 'alert-success');
+
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+
+                // Redirige vers : Accueil ou Register
+                setTimeout(() => {
+                    window.location = '/';
+                }, 3000);
+            });
+        }
+
+        return false;
+    }
+
+    const { name, email } = formData;
 
     return (
-        <Fragment>
+        <div className="row">
             <h2>Vos informations :</h2>
-            <form onSubmit={onSubmitHandler}>
-                <div className="mb-3 col-md-4">
-                    <label htmlFor="name" className="form-label">
-                        Name
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        className="form-control"
-                        id="name"
-                        onChange={onChangeHandler}
-                    />
-                </div>
-                <div className="mb-3 col-md-4">
-                    <label htmlFor="avatar" className="form-label">
-                        Votre photo de profil
-                    </label>
-                    <input
-                        type="file"
-                        name="avatar"
-                        className="form-control"
-                        id="name"
-                        onChange={loadImage}
-                    />
-                </div>
-                <div className="mb-3 col-md-4">
-                    <label htmlFor="email" className="form-label">
-                        Email address
-                    </label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        id="email"
-                        autoComplete="off"
-                        aria-describedby="emailHelp"
-                        onChange={onChangeHandler}
-                    />
-                    <div id="emailHelp" className="form-text">
-                        We'll never share your email with anyone else.
+            <div className="col-md-4">
+                <Notification
+                    message={message}
+                    visible={notify}
+                    level={level}
+                />
+                <form onSubmit={onSubmitHandler}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            className="form-control"
+                            id="name"
+                            value={name || ''}
+                            onChange={onChangeHandler}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="avatar" className="form-label">
+                            Votre photo de profil
+                        </label>
+                        <input
+                            type="file"
+                            name="avatar"
+                            className="form-control"
+                            id="avatar"
+                            onChange={loadImage}
+                        />
+                    </div>
+                    <div className="mb-3 ">
+                        <label htmlFor="email" className="form-label">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            id="email"
+                            value={email}
+                            autoComplete="off"
+                            aria-describedby="emailHelp"
+                            onChange={onChangeHandler}
+                        />
+                        <div id="emailHelp" className="form-text">
+                            We'll never share your email with anyone else.
+                        </div>
+                    </div>
+
+                    <button type="submit" className="btn btn-primary">
+                        Submit
+                    </button>
+                </form>
+            </div>
+            <div className="col-md-6 offset-2">
+                <div className="card mb-3" style={{ maxWidth: '540px' }}>
+                    <div className="row g-0">
+                        <div className="col-md-4">
+                            <img
+                                src={user.avatar}
+                                className="img-fluid rounded-start"
+                                alt="..."
+                            />
+                        </div>
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title">{user.name}</h5>
+                                <p className="card-text">{user.email}</p>
+                                <p className="card-text">
+                                    <small className="text-muted d-block">
+                                        Profile crée le :{' '}
+                                        {new Date(
+                                            user.createdAt
+                                        ).toLocaleDateString()}{' '}
+                                    </small>
+                                    <small className="text-muted">
+                                        Dernière mise à jour :{' '}
+                                        {new Date(
+                                            user.updatedAt
+                                        ).toLocaleDateString()}{' '}
+                                        à{' '}
+                                        {new Date(
+                                            user.updatedAt
+                                        ).toLocaleTimeString()}
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="mb-3 col-md-4">
-                    <label htmlFor="password" className="form-label">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        name="password"
-                        className="form-control"
-                        id="password"
-                        autoComplete="off"
-                        onChange={onChangeHandler}
-                    />
-                </div>
-
-                <button type="submit" className="btn btn-primary">
-                    Submit
-                </button>
-            </form>
-        </Fragment>
+                <form onSubmit={deleteUser}>
+                    <button className="btn btn-danger btn-sm" type="submit">
+                        Effacer le compte
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }
 

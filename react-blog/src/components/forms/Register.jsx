@@ -38,13 +38,18 @@ const Register = () => {
 
         if (data.msg) {
             setMessage(data.msg);
+
+            setTimeout(() => {
+                window.location = '/login';
+            }, 3000);
+
             return maybeNotify(data.msg, 'alert-success');
         }
 
         return maybeNotify(data, 'alert-danger');
     };
 
-    const maybeNotify = (mess, level, timeout = 5000) => {
+    const maybeNotify = (mess, level, timeout = 3000) => {
         setNotify(true);
         setMessage(mess);
         setLevel(level);
