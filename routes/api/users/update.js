@@ -5,6 +5,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
     // Mettre à jour l'utilisateur ici
     //
+    console.log(req.body);
 
     res.json({ msg: 'Message depuis le fichier update' });
 });

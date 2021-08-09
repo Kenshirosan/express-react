@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-const Profile = () => {
+function Profile() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -9,22 +9,36 @@ const Profile = () => {
     });
 
     // Récupérer les données des inputs
-    const onChangeHandler = e => {
+    function onChangeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    }
 
-    const loadImage = e => {
-        console.log(e);
-    };
+    function loadImage(e) {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+
+        reader.onload = e => {
+            setFormData({ ...formData, avatar: e.target.result });
+        };
+    }
 
     // Envoyer le formulaire dans la base de données
+    async function onSubmitHandler(e) {
+        e.preventDefault();
+
+        // Faire fetch ici : URL : /api/users/update
+        console.log(e.target);
+    }
 
     const { name, email, avatar, password } = formData;
 
     return (
         <Fragment>
             <h2>Vos informations :</h2>
-            <form>
+            <form onSubmit={onSubmitHandler}>
                 <div className="mb-3 col-md-4">
                     <label htmlFor="name" className="form-label">
                         Name
@@ -39,7 +53,7 @@ const Profile = () => {
                 </div>
                 <div className="mb-3 col-md-4">
                     <label htmlFor="avatar" className="form-label">
-                        Name
+                        Votre photo de profil
                     </label>
                     <input
                         type="file"
@@ -86,6 +100,6 @@ const Profile = () => {
             </form>
         </Fragment>
     );
-};
+}
 
 export default Profile;
