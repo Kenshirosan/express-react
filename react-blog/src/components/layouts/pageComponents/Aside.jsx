@@ -14,8 +14,8 @@ const Aside = () => {
                     <ol className="list-unstyled mb-0">
                         {/* */}
                         {/* map ici avec les données qui viennent du fichier data */}
-                        {archives.map(archive => (
-                            <li>
+                        {archives.map((archive, index) => (
+                            <li key={index}>
                                 <a href="/">{archive}</a>
                             </li>
                         ))}
@@ -25,8 +25,8 @@ const Aside = () => {
                 <div className="p-4">
                     <h4 className="fst-italic">Elsewhere</h4>
                     <ol className="list-unstyled">
-                        {socialLinks.map(link => (
-                            <li>
+                        {socialLinks.map((link, index) => (
+                            <li key={index}>
                                 <a href="/">{link}</a>
                             </li>
                         ))}

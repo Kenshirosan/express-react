@@ -1,27 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { headerLinks } from './components/data/data';
+import PublicRoute from './components/routes/PublicRoute';
+import PrivateRoute from './components/routes/PrivateRoute';
+
 import Register from './components/forms/Register';
-import Login from "./components/forms/Login";
+import Login from './components/forms/Login';
 import Article from './components/layouts/pageComponents/Article';
-import Header from './components/layouts/Header';
 import Main from './components/layouts/pages/Main';
 import Footer from './components/layouts/Footer';
 import ArticleOfTheDayComponent from './components/layouts/pageComponents/ArticleOfTheDayComponent';
+import Dashboard from './components/layouts/pages/Dashboard';
+import Profile from './components/layouts/pageComponents/Profile';
 
 const App = () => {
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem('user')) || { email: '' }
+    );
+    // Penser au composant 404 NotFound, ou un composant qui gère les erreurs HTTP
     return (
         <Fragment>
             <Router>
-                <Header links={headerLinks} />
                 <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/article/:id" component={Article} />
-                    <Route
+                    <PublicRoute exact path="/" component={Main} />
+                    <PublicRoute path="/register" component={Register} />
+                    <PublicRoute path="/login" component={Login} />
+                    <PublicRoute path="/article/:id" component={Article} />
+                    <PublicRoute
                         path="/featured/:id"
                         component={ArticleOfTheDayComponent}
+                    />
+
+                    {/* Route privées */}
+                    <PrivateRoute
+                        path="/dashboard"
+                        auth={user}
+                        component={Dashboard}
+                    />
+                    <PrivateRoute
+                        path="/profile/me"
+                        auth={user}
+                        component={Profile}
                     />
                 </Switch>
                 <Footer />

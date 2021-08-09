@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
                     return res.status(200).json({
                         msg: 'Vous êtes maintenant connecté ! 🎆',
                         token,
+                        user, // Ajout de l'user dans la réponse : temporaire
                     });
                 }
             );

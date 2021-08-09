@@ -2,14 +2,27 @@ import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = ({ links }) => {
+    function logout() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+
+        window.location = '/'; // Pas idéal
+    }
+
     return (
         <div className="container">
             <header className="blog-header py-3">
                 <div className="row flex-nowrap justify-content-between align-items-center">
                     <div className="col-4 pt-1">
-                        <NavLink className="link-secondary" to="/login">
-                            Login
-                        </NavLink>
+                        {localStorage.getItem('user') === null ? (
+                            <NavLink className="link-secondary" to="/login">
+                                Login
+                            </NavLink>
+                        ) : (
+                            <NavLink className="link-secondary" to="/dashboard">
+                                Dashboard
+                            </NavLink>
+                        )}
                     </div>
                     <div className="col-4 text-center">
                         <Link className="blog-header-logo text-dark" to="/">
@@ -40,12 +53,22 @@ const Header = ({ links }) => {
                                 <path d="M21 21l-5.2-5.2" />
                             </svg>
                         </Link>
-                        <Link
-                            className="btn btn-sm btn-outline-secondary"
-                            to="/register"
-                        >
-                            Sign up
-                        </Link>
+                        {localStorage.getItem('user') === null ? (
+                            <Link
+                                className="btn btn-sm btn-outline-secondary"
+                                to="/register"
+                            >
+                                Sign up
+                            </Link>
+                        ) : (
+                            <NavLink
+                                className="link-secondary"
+                                to="/logout"
+                                onClick={logout}
+                            >
+                                Logout
+                            </NavLink>
+                        )}
                     </div>
                 </div>
             </header>

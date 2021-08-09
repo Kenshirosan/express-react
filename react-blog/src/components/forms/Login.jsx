@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Notification from '../layouts/pageComponents/Notification';
 import LinkBack from '../layouts/pageComponents/LinkBack';
 import { validateEmail, fetchData } from '../../utilities';
@@ -20,7 +20,7 @@ const Login = () => {
     };
 
     const onSubmitHandler = async e => {
-        // e.preventDefault();
+        e.preventDefault();
 
         const { email } = formData;
 
@@ -39,7 +39,9 @@ const Login = () => {
             setMessage(data.msg);
 
             localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
 
+            // Redirection avec timeOut : pas idéal
             setTimeout(function () {
                 window.location = '/';
             }, 3000);
@@ -65,39 +67,48 @@ const Login = () => {
             {/**/}
             <Notification message={message} visible={notify} level={level} />
 
-            <h2 className="text-center text-primary">Login Form</h2>
-            <form className="row g-3 mb-5" onSubmit={onSubmitHandler}>
-                <div className="col-md-8">
-                    <label htmlFor="inputEmail4" className="form-label">
-                        Email
-                    </label>
-                    <input
-                        type="text"
-                        name="email"
-                        className="form-control"
-                        id="inputEmail4"
-                        onChange={onChangeHandler}
-                    />
-                </div>
-                <div className="col-md-8">
-                    <label htmlFor="password" className="form-label">
-                        Password
-                    </label>
-                    <input
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        onChange={onChangeHandler}
-                    />
-                </div>
+            {localStorage.getItem('user') === null ? (
+                <Fragment>
+                    <h2 className="text-center text-primary">Login Form</h2>
+                    <form className="row g-3 mb-5" onSubmit={onSubmitHandler}>
+                        <div className="col-md-8">
+                            <label htmlFor="inputEmail4" className="form-label">
+                                Email
+                            </label>
+                            <input
+                                type="text"
+                                name="email"
+                                className="form-control"
+                                id="inputEmail4"
+                                onChange={onChangeHandler}
+                            />
+                        </div>
+                        <div className="col-md-8">
+                            <label htmlFor="password" className="form-label">
+                                Password
+                            </label>
+                            <input
+                                name="password"
+                                type="password"
+                                className="form-control"
+                                id="password"
+                                onChange={onChangeHandler}
+                            />
+                        </div>
 
-                <div className="col-12">
-                    <button type="submit" className="btn btn-primary">
-                        Sign in
-                    </button>
+                        <div className="col-12">
+                            <button type="submit" className="btn btn-primary">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+                </Fragment>
+            ) : (
+                <div className="alert alert-warning">
+                    {/* Changer le message pour prendre en compte quand on vient de faire un login avec succès */}
+                    <p>Vous êtes déjà authentifié</p>
                 </div>
-            </form>
+            )}
             <LinkBack />
         </article>
     );

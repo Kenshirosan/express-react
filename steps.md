@@ -41,6 +41,7 @@
 25. `npm i bcryptjs`
 26. Gérer les mots de passe avec les méthodes **salt, hash et compare**
 
+## Gestion des routes (client)
 
 # Création des JSONWEBTOKEN
 1. `npm install jsonwebtoken`.
