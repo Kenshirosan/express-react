@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
 
@@ -13,7 +13,7 @@ import Dashboard from './components/layouts/pages/Dashboard';
 import Profile from './components/layouts/pageComponents/Profile';
 
 const App = () => {
-    const [user, setUser] = useState(
+    const [user] = useState(
         JSON.parse(localStorage.getItem('user')) || { email: '' }
     );
     // Penser au composant 404 NotFound, ou un composant qui gère les erreurs HTTP

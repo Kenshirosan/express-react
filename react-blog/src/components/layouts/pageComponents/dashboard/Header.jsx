@@ -11,7 +11,7 @@ const Header = () => {
             <div className="navbar-nav">
                 {/*Implémenter logout*/}
                 <div className="nav-item text-nowrap">
-                    <a className="nav-link px-3" href="#">
+                    <a className="nav-link px-3" href="!#">
                         Sign out
                     </a>
                 </div>
