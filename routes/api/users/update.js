@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
+    // Mettre à jour l'utilisateur ici
+    // On
+
     res.json({ msg: 'Message depuis le fichier update' });
 });
 
