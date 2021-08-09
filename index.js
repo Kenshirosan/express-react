@@ -18,6 +18,9 @@ app.use('/api/users/destroy', require('./routes/api/users/destroy'));
 
 app.use('/api/users', require('./routes/api/users'));
 
+// Categories
+app.use('/api/categories/create', require('./routes/api/categories/create'));
+
 const port = process.env.PORT || 5000;
 
 app.listen(port);

@@ -42,6 +42,10 @@
 26. Gérer les mots de passe avec les méthodes **salt, hash et compare**
 
 ## Gestion des routes (client)
+27. Implémentation des routes publiques et privées. (utilisateur authentifié ou pas)
+28. Mise en place d'un dashboard.
+
+---
 
 # Création des JSONWEBTOKEN
 1. `npm install jsonwebtoken`.
@@ -62,3 +66,32 @@
 5. Vous redémarrez Compass.
 6. On teste la string de connexion dans Compass : `mongodb://<user>:<password>@localhost:27017/<dbName>`
 7. Si ça marche : on est OK, Sinon on reprend depuis 5.
+
+---
+
+# Gestion des resources (CRUD, API RESTful)
+1. Sur l'api, on crée les dossiers qui vont servir à gérer les ressources.
+2. Sur le client, on crée une route et un composant qui représente ces ressources.
+   - On a besoin d'un formulaire et / ou d'un identifiant pour gérer les resource.
+   - Pour créer une ressource : un formulaire.
+   - Pour mettre à jour une ressource : un formulaire et un identifiant.
+   - Pour effacer une ressource : un identifiant.
+   - Pour lire / afficher une ressource : un identifiant.
+   - Pour lire /afficher toutes les données liées à une ressource : nom de la ressource.
+3. Quand on commence à gérer une resource, on la finit.
+
+
+
+### Exemple des étapes pour gérer les catégories :
+1. Client
+   - On crée une route pour accéder à la page de gestion des catégories.
+   - On crée un composant qui contient un formulaire de création d'une catégorie.
+   - On crée un formulaire de mise à jour des catégories. (?).
+   - On crée un formulaire pour effacer une catégorie (? pour les articles appartenant à cette catégorie, automatiquement dans les archives (par défaut)).
+
+2. Serveur
+   - On crée une route et une fonction qui sert à créer la catégorie.
+   - On crée une route et une fonction qui sert à mettre à jour la catégorie.
+   - On crée une route et une fonction qui sert effacer catégorie.
+   - On crée une route et une fonction qui sert récupérer la catégorie.
+   - On crée une route et une fonction qui sert à récupérer toutes les catégories.

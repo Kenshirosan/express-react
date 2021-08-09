@@ -11,6 +11,7 @@ const Nav = () => {
                 <ul className="nav flex-column">
                     <li className="nav-item">
                         <NavLink
+                            exact
                             className="nav-link"
                             aria-current="page"
                             to="/dashboard"
@@ -27,6 +28,17 @@ const Nav = () => {
                         >
                             <span data-feather="home" />
                             Votre Profile
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink
+                            exact
+                            className="nav-link"
+                            aria-current="page"
+                            to="/dashboard/categories"
+                        >
+                            <span data-feather="home" />
+                            Categories
                         </NavLink>
                     </li>
                 </ul>

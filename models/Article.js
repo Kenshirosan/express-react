@@ -9,6 +9,10 @@ const ArticleSchema = new Schema({
     figure: {
         type: String,
     },
+    userId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'user',
+    },
     category: {
         type: mongoose.Types.ObjectId,
         ref: 'category',

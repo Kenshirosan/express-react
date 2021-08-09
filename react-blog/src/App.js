@@ -11,6 +11,7 @@ import Footer from './components/layouts/Footer';
 import ArticleOfTheDayComponent from './components/layouts/pageComponents/ArticleOfTheDayComponent';
 import Dashboard from './components/layouts/pages/Dashboard';
 import Profile from './components/layouts/pageComponents/Profile';
+import Category from './components/layouts/pages/Category';
 
 const App = () => {
     const [user] = useState(
@@ -32,6 +33,7 @@ const App = () => {
 
                     {/* Route privées */}
                     <PrivateRoute
+                        exact
                         path="/dashboard"
                         auth={user}
                         component={Dashboard}
@@ -40,6 +42,12 @@ const App = () => {
                         path="/profile/me"
                         auth={user}
                         component={Profile}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/dashboard/categories"
+                        auth={user}
+                        component={Category}
                     />
                 </Switch>
                 <Footer />
