@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
             return jwt.sign(
                 payload,
                 process.env.APP_SECRET,
-                { expiresIn: 3600 }, // Validité du token en seconde || -1 pour validité infinie
+                { expiresIn: 36000 }, // Validité du token en seconde || -1 pour validité infinie
                 function (err, token) {
                     if (err) throw err;
 

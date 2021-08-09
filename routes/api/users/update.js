@@ -1,13 +1,30 @@
 const express = require('express');
 const router = express.Router();
-
+const auth = require('../../../middleware/auth');
+const User = require('../../../models/User');
 // !! Penser au middleware auth !!
-router.post('/', (req, res) => {
+
+/* TODO : Valider les champs et les assainnir  (Enlever les tags HTML et les scripts)  */
+router.post('/', auth, async (req, res) => {
     // Mettre à jour l'utilisateur ici
     //
-    console.log(req.body);
+    try {
+        const { name, avatar, email } = req.body;
 
-    res.json({ msg: 'Message depuis le fichier update' });
+        const { id } = req.user;
+
+        const user = await User.findOne({ _id: id });
+
+        user.name = name;
+        user.avatar = avatar;
+        user.email = email;
+        user.updatedAt = new Date();
+        await user.save();
+
+        res.json({ msg: 'Message depuis le fichier update' });
+    } catch (e) {
+        res.status(500).json({ msg: "Un erreur s'est produite !" });
+    }
 });
 
 module.exports = router;

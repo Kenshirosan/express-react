@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { fetchData } from '../../../utilities';
 
 function Profile() {
     const [formData, setFormData] = useState({
@@ -30,7 +31,10 @@ function Profile() {
         e.preventDefault();
 
         // Faire fetch ici : URL : /api/users/update
-        console.log(e.target);
+        const response = fetchData('/api/users/update', formData, 'POST');
+
+        // Si erreur de token : On fait un logout et on redirige vers la page /login
+        console.log(response);
     }
 
     const { name, email, avatar, password } = formData;
