@@ -11,9 +11,11 @@ const Category = () => {
     function onSubmitHandler(e) {
         e.preventDefault();
 
-        fetchData('/api/categories/create', formData, 'POST').then(data =>
-            console.log(formData)
-        );
+        fetchData('/api/categories/create', formData, 'POST').then(data => {
+            console.log(formData);
+
+            setFormData({ name: '' });
+        });
     }
 
     const { name } = formData;
@@ -35,7 +37,7 @@ const Category = () => {
             </div>
             <div className="col-12">
                 <button type="submit" className="btn btn-primary">
-                    Sign in
+                    Create
                 </button>
             </div>
         </form>

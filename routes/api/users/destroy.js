@@ -9,7 +9,7 @@ const User = require('../../../models/User');
 router.post('/', auth, async (req, res) => {
     const { id } = req.user;
 
-    const user = await User.findOneAndRemove({ _id: id });
+    await User.findOneAndRemove({ _id: id });
 
     res.json({ msg: 'Votre compte a été supprimé !' });
 });
