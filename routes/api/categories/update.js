@@ -11,9 +11,16 @@ const Category = require('../../../models/Category');
 router.post('/', auth, async (req, res) => {
     try {
         //
+        const { id, name } = req.body;
+
         // UPDATE ONE CATEGORY
+        const cat = await Category.findOne({ _id: id });
+        cat.name = name;
+
+        await cat.save();
+
         //
-        res.status(201).json({ msg: 'Catégorie créé ! 🎆' });
+        res.status(201).json({ msg: 'Catégorie mise à jour ! 🎆' });
     } catch (error) {
         let messages = [];
 

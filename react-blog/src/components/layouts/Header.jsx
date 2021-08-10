@@ -1,13 +1,22 @@
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { fetchData } from '../../utilities';
 
-const Header = ({ links }) => {
+const Header = () => {
+    const [categories, setCategories] = useState();
+
     function logout() {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
 
         window.location = '/'; // Pas idéal
     }
+
+    useEffect(() => {
+        fetchData('/api/categories').then(data =>
+            setCategories(data.categories)
+        );
+    }, []);
 
     return (
         <div className="container">
@@ -75,13 +84,13 @@ const Header = ({ links }) => {
 
             <div className="nav-scroller py-1 mb-2">
                 <nav className="nav d-flex justify-content-between">
-                    {links.map((link, index) => (
+                    {categories?.map(category => (
                         <button
-                            key={index}
+                            key={category.id}
                             style={noStyle}
                             className="p-2 link-secondary"
                         >
-                            {link}
+                            {category.name}
                         </button>
                     ))}
                 </nav>
@@ -94,10 +103,6 @@ const noStyle = {
     background: 'transparent',
     border: 'none',
     textDecoration: 'underline',
-};
-
-Header.propTypes = {
-    links: PropTypes.array.isRequired,
 };
 
 export default Header;

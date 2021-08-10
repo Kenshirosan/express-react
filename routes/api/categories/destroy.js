@@ -11,9 +11,12 @@ const Category = require('../../../models/Category');
 router.post('/', auth, async (req, res) => {
     try {
         //
+        const { id } = req.body;
+
+        await Category.findOneAndRemove({ _id: id });
         // DELETE ONE CATEGORY
         //
-        res.status(201).json({ msg: 'Catégorie créé ! 🎆' });
+        res.status(201).json({ msg: 'Catégorie effacée ! 🎆' });
     } catch (error) {
         let messages = [];
 

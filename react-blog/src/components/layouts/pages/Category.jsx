@@ -2,18 +2,22 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { fetchData } from '../../../utilities';
 
 const Category = () => {
-    const [formData, setFormData] = useState({ name: '' }); // State pour le formulaire
+    const [formData, setFormData] = useState({ name: '', id: '' }); // State pour le formulaire
     const [categories, setCategories] = useState([]); // State pour les catégories
+    const [editMode, setEditMode] = useState(false);
 
     function onChangeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    // Récupérer les catégories au chargement du composant
-    useEffect(() => {
+    function getCategories() {
         fetchData('/api/categories').then(data =>
             setCategories(data.categories)
         );
+    }
+    // Récupérer les catégories au chargement du composant
+    useEffect(() => {
+        getCategories();
     }, []);
 
     /**
@@ -23,9 +27,44 @@ const Category = () => {
     function onSubmitHandler(e) {
         e.preventDefault();
 
-        fetchData('/api/categories/create', formData, 'POST').then(data => {
+        let action = 'create';
+
+        // Si edit mode : url = ''
+        if (editMode) {
+            action = 'update';
+        }
+
+        fetchData(`/api/categories/${action}`, formData, 'POST').then(data => {
             setFormData({ name: '' });
+            getCategories();
+
+            setEditMode(false);
         });
+    }
+
+    function edit(id) {
+        const cat = categories.find(category => category._id === id);
+
+        setFormData({ name: cat.name, id: cat._id });
+
+        setEditMode(true);
+    }
+
+    function destroy(id) {
+        if (window.confirm('Etes vous sur ?')) {
+            fetchData('/api/categories/destroy', { id }, 'POST').then(data => {
+                // Filtre les catégories et on enlève celle dont l'id correspond au param id
+                // const newCategories = categories.filter(
+                //     category => category._id !== id
+                // );
+
+                return getCategories();
+
+                // return setCategories(newCategories);
+            });
+        }
+
+        return false;
     }
 
     const { name } = formData;
@@ -62,13 +101,21 @@ const Category = () => {
                     <hr />
                     {/* MAP ici pour afficher toutes les catégories */}
                     {categories.map(category => (
-                        <div key={category.id}>
+                        <div key={category._id}>
                             <h4 className="d-inline-block">{category.name}</h4>
                             <button
+                                onClick={() => destroy(category._id)}
                                 type="button"
                                 className="btn btn-danger btn-sm mx-3"
                             >
                                 Supprimer
+                            </button>
+                            <button
+                                onClick={() => edit(category._id)}
+                                type="button"
+                                className="btn btn-primary btn-sm mx-3"
+                            >
+                                Update
                             </button>
                         </div>
                     ))}
