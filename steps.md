@@ -102,12 +102,12 @@
 
 1. Faire une requête pour aller chercher les catégories en BDD.
 2. Quand on reçoit la réponse : on affiche les catégories.
-3. Quand on clique sur une catégorie, on remplit le formulaire automatiquement
-4. Quand on submit le form, on met à jour la catégorie
+3. Quand on clique sur une catégorie, on remplit le formulaire automatiquement.
+4. Quand on submit le form, on met à jour la catégorie.
 5. on gère la réponse du serveur.
 
 
 
 
-1. Pour chaque catégorie, un boutton supprimer
+1. Pour chaque catégorie, un bouton supprimer.
 2. Quand on clique sur le bouton, on efface la catégorie après confirmation.

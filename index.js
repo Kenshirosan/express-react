@@ -20,7 +20,10 @@ app.use('/api/users/destroy', require('./routes/api/users/destroy'));
 app.use('/api/users', require('./routes/api/users'));
 
 // Categories Routes
-app.use('/api/categories/create', require('./routes/api/categories/create'));
+app.use('/api/categories/create', require('./routes/api/categories/create')); // Create
+app.use('/api/categories', require('./routes/api/categories')); // Read
+app.use('/api/categories/update', require('./routes/api/categories/update')); // Update
+app.use('/api/categories/delete', require('./routes/api/categories/destroy')); // Delete
 
 const port = process.env.PORT || 5000;
 
