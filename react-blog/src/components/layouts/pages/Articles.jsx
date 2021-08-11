@@ -8,7 +8,9 @@ function Articles() {
         title: '',
         body: '',
         metaDescription: '',
+        category: '',
     });
+    const [categories, setCategories] = useState([]);
     const [articles, setArticles] = useState([]);
     // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour
 
@@ -30,9 +32,17 @@ function Articles() {
 
     useEffect(() => {
         getArticles();
+        getCategories();
     }, []);
 
+    function getCategories() {
+        fetchData('/api/categories').then(data =>
+            setCategories(data.categories)
+        );
+    }
+
     function onChangeHandler(e) {
+        console.log(e);
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
@@ -95,6 +105,29 @@ function Articles() {
                             value={metaDescription || ''}
                             onChange={onChangeHandler}
                         />
+                    </div>
+                    <div className="col-md-8">
+                        <label htmlFor="metaDescription" className="form-label">
+                            Catégories de l'article
+                        </label>
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            name="category"
+                            onChange={onChangeHandler}
+                        >
+                            <option defaultValue>Open this select menu</option>
+                            {categories.map(category => {
+                                return (
+                                    <option
+                                        key={category._id}
+                                        value={category._id}
+                                    >
+                                        {category.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
                     </div>
                     <div className="col-md-12">
                         <label htmlFor="body" className="form-label">

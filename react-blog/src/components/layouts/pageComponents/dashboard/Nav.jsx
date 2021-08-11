@@ -24,7 +24,7 @@ const Nav = () => {
                             aria-current="page"
                             to="/dashboard"
                         >
-                            <span className="fas fa-users" /> Dashboard
+                            <span className="fas fa-home" /> Dashboard
                         </NavLink>
                     </li>
                     <li className="nav-item">
@@ -33,8 +33,7 @@ const Nav = () => {
                             aria-current="page"
                             to="/profile/me"
                         >
-                            <span data-feather="home" />
-                            Votre Profile
+                            <span className="fas fa-users" /> Votre Profile
                         </NavLink>
                     </li>
                     <li className="nav-item">
@@ -44,8 +43,7 @@ const Nav = () => {
                             aria-current="page"
                             to="/dashboard/categories"
                         >
-                            <span data-feather="home" />
-                            Categories
+                            <span className="fas fa-file" /> Categories
                         </NavLink>
                     </li>
                     <li className="nav-item">
@@ -55,8 +53,7 @@ const Nav = () => {
                             aria-current="page"
                             to="/dashboard/articles"
                         >
-                            <span data-feather="home" />
-                            Articles
+                            <span className="fas fa-pen" /> Articles
                         </NavLink>
                     </li>
                 </ul>

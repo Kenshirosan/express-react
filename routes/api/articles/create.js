@@ -11,13 +11,18 @@ const Article = require('../../../models/Article');
 router.post('/', auth, async (req, res) => {
     try {
         //
-        const { title, body, metaDescription } = req.body;
+        const { title, body, metaDescription, category } = req.body;
+        console.log(category);
+        if (!category || category === 'Open this select menu') {
+            res.status(500).json({ err: 'Vous devez sélectionner une catégorie' });
+        }
 
         const art = new Article();
         art.title = title;
         art.body = body;
         art.metaDescription = metaDescription;
         art.userId = req.user.id;
+        art.categoryId = category;
 
         await art.save();
         //

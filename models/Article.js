@@ -13,7 +13,7 @@ const ArticleSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref: 'user',
     },
-    category: {
+    categoryId: {
         type: mongoose.Types.ObjectId,
         ref: 'category',
     },

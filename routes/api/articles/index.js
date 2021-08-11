@@ -45,7 +45,9 @@ router.get('/:id', async (req, res) => {
         // GET ALL ARTICLES
         const { id } = req.params;
 
-        const article = await Article.findOne({ _id: id }).populate('userId', 'name'); // Comment omettre le mot de passe avec cette requête.
+        const article = await Article.findOne({ _id: id })
+            .populate('userId', 'name') // Comment omettre le mot de passe avec cette requête.
+            .populate('categoryId', 'name');
         //
         res.status(200).json({ article });
     } catch (error) {

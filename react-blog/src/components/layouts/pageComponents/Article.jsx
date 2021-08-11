@@ -21,7 +21,8 @@ const Article = () => {
                     <h2 className="blog-post-title">{article.title}</h2>
                     <p className="blog-post-meta">
                         {new Date(article.createdAt).toLocaleDateString()}{' '}
-                        <a href="!#">{article.userId.name}</a>
+                        <a href="!#">{article.userId.name}</a> Catégory :{' '}
+                        <a href="!#">{article.categoryId.name}</a>
                     </p>
 
                     <div dangerouslySetInnerHTML={{ __html: article.body }} />
