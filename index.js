@@ -28,6 +28,7 @@ app.use('/api/categories/destroy', require('./routes/api/categories/destroy')); 
 
 // Articles Routes
 app.use('/api/articles/create', require('./routes/api/articles/create'));
+app.use('/api/articles', require('./routes/api/articles'));
 
 const port = process.env.PORT || 5000;
 

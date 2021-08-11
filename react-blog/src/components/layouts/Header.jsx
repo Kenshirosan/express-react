@@ -86,7 +86,7 @@ const Header = () => {
                 <nav className="nav d-flex justify-content-between">
                     {categories?.map(category => (
                         <button
-                            key={category.id}
+                            key={category._id}
                             style={noStyle}
                             className="p-2 link-secondary"
                         >

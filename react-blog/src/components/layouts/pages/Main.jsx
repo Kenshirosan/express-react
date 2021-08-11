@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Aside from '../pageComponents/Aside';
 import Hero from '../pageComponents/Hero';
 import SubHero from '../pageComponents/SubHero';
 import ArticleMain from '../pageComponents/ArticleMain';
 
 import {
-    data,
     featured,
     mainTitle,
     blogTitle,
     postOfTheDayExcerpt,
 } from '../../data/data';
+import { fetchData } from '../../../utilities';
 
 // Karim : Oui pour setArticles
 // Moi : NON
 
 const Main = () => {
-    const [articles] = useState(data);
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+        fetchData('/api/articles').then(data => setArticles(data.articles));
+    }, []);
 
     return (
         <main className="container">
@@ -31,7 +35,7 @@ const Main = () => {
                     </h3>
 
                     {articles.map(article => (
-                        <ArticleMain key={article.id} article={article} />
+                        <ArticleMain key={article._id} article={article} />
                     ))}
                 </div>
                 <Aside />

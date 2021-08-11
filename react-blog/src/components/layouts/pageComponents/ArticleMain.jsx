@@ -10,10 +10,11 @@ const ArticleMain = ({ article }) => {
             </h2>
 
             <p className="blog-post-meta">
-                {article.date} by <a href="/">{article.author}</a>
+                Le {new Date(article.createdAt).toLocaleDateString()} par{' '}
+                <a href="/">{article.userId?.name}</a>
             </p>
 
-            <p>{article.body}</p>
+            <div dangerouslySetInnerHTML={{ __html: article.body }} />
 
             {/*  react null pattern*/}
             {article.list && article.list.length ? (

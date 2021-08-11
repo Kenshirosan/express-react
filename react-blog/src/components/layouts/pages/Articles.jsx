@@ -1,17 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { fetchData } from '../../../utilities';
 
 function Articles() {
-    const [formData, setFormData] = useState({ title: '', body: '' });
+    const [formData, setFormData] = useState({
+        title: '',
+        body: '',
+        metaDescription: '',
+    });
+    const [articles, setArticles] = useState([]);
+    // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour
+
+    useEffect(() => {
+        getArticles();
+    }, []);
 
     function onChangeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    function onSubmitHandler(e) {
-        console.log(e);
+    function handleChangeQuill(value) {
+        setFormData({ ...formData, body: value });
     }
 
-    const { title, body } = formData;
+    function getArticles() {
+        fetchData('/api/articles').then(data => {
+            setArticles(data.articles);
+        });
+    }
+
+    function onSubmitHandler(e) {
+        e.preventDefault();
+
+        let action = 'create';
+
+        // Si on est en mode mise à jour action = autre chose
+
+        fetchData(`/api/articles/${action}`, formData, 'POST').then(data =>
+            getArticles()
+        );
+    }
+
+    function editArticle(id, e) {
+        e.preventDefault();
+
+        console.log(id);
+    }
+    const { title, body, metaDescription } = formData;
 
     return (
         <div className="row">
@@ -32,15 +68,27 @@ function Articles() {
                         />
                     </div>
                     <div className="col-md-8">
+                        <label htmlFor="metaDescription" className="form-label">
+                            Meta Description
+                        </label>
+                        <input
+                            type="text"
+                            name="metaDescription"
+                            className="form-control"
+                            id="metaDescription"
+                            value={metaDescription || ''}
+                            onChange={onChangeHandler}
+                        />
+                    </div>
+                    <div className="col-md-12">
                         <label htmlFor="body" className="form-label">
                             Contenu
                         </label>
-                        <textarea
+                        <ReactQuill
                             name="body"
-                            className="form-control"
+                            value={body}
                             id="body"
-                            value={body || ''}
-                            onChange={onChangeHandler}
+                            onChange={handleChangeQuill}
                         />
                     </div>
                     <div className="col-12">
@@ -49,6 +97,29 @@ function Articles() {
                         </button>
                     </div>
                 </form>
+            </div>
+            <div className="col-md-4 offset-1">
+                <h2>
+                    Liste des articles :{' '}
+                    <small className="d-block fw-lighter fs-6 text-info">
+                        Cliquez pour mettre à jour
+                    </small>
+                </h2>
+                <ul className="list-group">
+                    {articles &&
+                        articles.map(art => {
+                            return (
+                                <li key={art._id}>
+                                    <a
+                                        onClick={e => editArticle(art._id, e)}
+                                        href="!#"
+                                    >
+                                        {art.title}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                </ul>
             </div>
         </div>
     );

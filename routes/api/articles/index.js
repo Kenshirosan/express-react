@@ -1,27 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../../middleware/auth');
 const Article = require('../../../models/Article');
 
 /**
  * @params Request: req, Response: res
- * @route POST /api/articles/create
+ * @route GET /api/articles/
  * @returns JSON
  */
-router.post('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
+        // GET ALL ARTICLES
+        const articles = await Article.find().populate('userId', 'name'); // Comment omettre le mot de passe avec cette requête.
         //
-        const { title, body, metaDescription } = req.body;
-
-        const art = new Article();
-        art.title = title;
-        art.body = body;
-        art.metaDescription = metaDescription;
-        art.userId = req.user.id;
-
-        await art.save();
-        //
-        res.status(201).json({ msg: 'Article créé ! 🎆' });
+        res.status(200).json({ articles });
     } catch (error) {
         let messages = [];
 

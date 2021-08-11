@@ -14,10 +14,17 @@ const Nav = () => {
                             exact
                             className="nav-link"
                             aria-current="page"
+                            to="/"
+                        >
+                            <span className="fas fa-blog" /> Blog
+                        </NavLink>
+                        <NavLink
+                            exact
+                            className="nav-link"
+                            aria-current="page"
                             to="/dashboard"
                         >
-                            <span data-feather="home" />
-                            Dashboard
+                            <span className="fas fa-users" /> Dashboard
                         </NavLink>
                     </li>
                     <li className="nav-item">

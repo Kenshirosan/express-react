@@ -5,7 +5,7 @@
 1. Tapez `npm init` et répondre aux questions.
 2. Créer un fichier `index.js` (le nom du fichier doit correspondre à la clé main dans `package.json`).
 3. On importe `express` et on crée une application avec `express()`.
-4. Si on veut gérer le format JSON : il le spécifier ainsi : `app.use(express.json({limit: '10mb', extended: false}))`. Les options limit et extended sont là à titre d'exemple : Lisez la doc et modifiez-les selon vos besoins.
+4. Si on veut gérer le format JSON : il faut le spécifier ainsi : `app.use(express.json({limit: '10mb', extended: false}))`. Les options limit et extended sont là à titre d'exemple : Lisez la doc et modifiez-les selon vos besoins.
 5. Créer un script npm start dans `package.json`.
 6. On install nodemon : `npm install --save-dev nodemon` ou `npm i -D nodemon`.
 7. On crée un script pour se servir de `nodemon`.
@@ -85,44 +85,44 @@
 
 ### Exemple des étapes pour gérer les catégories :
 1. Client
-   - On crée une route pour accéder à la page de gestion des catégories.
-   - On crée un composant qui contient un formulaire de création d'une catégorie.
-   - On crée un formulaire de mise à jour des catégories. (?).
-   - On crée un formulaire pour effacer une catégorie (? pour les articles appartenant à cette catégorie, automatiquement dans les archives (par défaut)).
+   - [x] On crée une route pour accéder à la page de gestion des catégories.
+   - [x] On crée un composant qui contient un formulaire de création d'une catégorie.
+   -  [x] On crée un formulaire de mise à jour des catégories. (?).
+   -  [x] On crée un formulaire pour effacer une catégorie (? pour les articles appartenant à cette catégorie, automatiquement dans les archives (par défaut)).
 
 2. Serveur
-   - On crée une route et une fonction qui sert à créer la catégorie.
-   - On crée une route et une fonction qui sert à mettre à jour la catégorie.
-   - On crée une route et une fonction qui sert effacer catégorie.
-   - On crée une route et une fonction qui sert récupérer la catégorie.
-   - On crée une route et une fonction qui sert à récupérer toutes les catégories.
+   - [x] On crée une route et une fonction qui sert à créer la catégorie.
+   - [x] On crée une route et une fonction qui sert à mettre à jour la catégorie.
+   - [x] On crée une route et une fonction qui sert effacer catégorie.
+   - [x] On crée une route et une fonction qui sert récupérer la catégorie.
+   - [x] On crée une route et une fonction qui sert à récupérer toutes les catégories.
 
 
 
 ### Afficher les catégories
 
-1. Faire une requête pour aller chercher les catégories en BDD.
-2. Quand on reçoit la réponse : on affiche les catégories.
-3. Quand on clique sur une catégorie, on remplit le formulaire automatiquement.
-4. Quand on submit le form, on met à jour la catégorie.
-5. on gère la réponse du serveur.
+1. [x] Faire une requête pour aller chercher les catégories en BDD.
+2. [x] Quand on reçoit la réponse : on affiche les catégories.
+3. [x] Quand on clique sur une catégorie, on remplit le formulaire automatiquement.
+4. [x] Quand on submit le form, on met à jour la catégorie.
+5. [x] On gère la réponse du serveur.
 
-1. Pour chaque catégorie, un bouton supprimer.
-2. Quand on clique sur le bouton, on efface la catégorie après confirmation.
+1. [x] Pour chaque catégorie, un bouton supprimer.
+2. [x] Quand on clique sur le bouton, on efface la catégorie après confirmation.
 
 
 
 ### Exemple des étapes pour gérer les articles :
 
 #### Dans React
-1. Créer un formulaire (composant React) dans le client.
-2. Ce composant contient les fonctions suivantes :
-   1. Une fonction pour gérer les inputs (onChange) (title <input>, body <textarea>).
-   2. Une fonction pour envoyer les données vers le serveur (onSubmit).
-   3. state : Un state pour les données du formulaire.
+- [x] Créer un formulaire (composant React) dans le client.
+- [x] Ce composant contient les fonctions suivantes :
+- [x] Une fonction pour gérer les inputs (onChange) (title <input>, body <textarea>).
+- [x] Une fonction pour envoyer les données vers le serveur (onSubmit).
+- [x] State : Un state pour les données du formulaire.
 
 
 #### Sur le serveur 
-1. Créer une route dans le fichier index.js (racine du serveur).
-2. Créer le fichier correspondant à la route.
-3. Pouvoir enregistrer un article dans la BDD avec ce fichier.
+- [x] Créer une route dans le fichier index.js (racine du serveur).
+- [x] Créer le fichier correspondant à la route.
+- [x] Pouvoir enregistrer un article dans la BDD avec ce fichier.
