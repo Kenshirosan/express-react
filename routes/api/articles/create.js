@@ -5,18 +5,15 @@ const Category = require('../../../models/Category');
 
 /**
  * @params Request: req, Response: res
- * @route POST /api/categories/destroy
+ * @route POST /api/articles/create
  * @returns JSON
  */
 router.post('/', auth, async (req, res) => {
     try {
         //
-        const { id } = req.body;
-
-        await Category.findOneAndRemove({ _id: id });
-        // DELETE ONE CATEGORY
+        console.log(req.body);
         //
-        res.status(201).json({ msg: 'Catégorie effacée ! 🎆' });
+        res.status(201).json({ msg: 'Article créé ! 🎆' });
     } catch (error) {
         let messages = [];
 

@@ -41,6 +41,17 @@ const Nav = () => {
                             Categories
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink
+                            exact
+                            className="nav-link"
+                            aria-current="page"
+                            to="/dashboard/articles"
+                        >
+                            <span data-feather="home" />
+                            Articles
+                        </NavLink>
+                    </li>
                 </ul>
 
                 <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

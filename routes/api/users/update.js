@@ -5,6 +5,11 @@ const User = require('../../../models/User');
 // !! Penser au middleware auth !!
 
 /* TODO : Valider les champs et les assainnir  (Enlever les tags HTML et les scripts)  */
+
+/**
+ * @method POST
+ * @route /api/users/update
+ */
 router.post('/', auth, async (req, res) => {
     // Mettre à jour l'utilisateur ici
     //

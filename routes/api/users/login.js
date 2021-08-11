@@ -4,6 +4,10 @@ const User = require('../../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+/**
+ * @method POST
+ * @route /api/users/login
+ */
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
     // Récuperer l'utilisateur dans la base de données grâce à son email.

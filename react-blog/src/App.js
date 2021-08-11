@@ -12,6 +12,8 @@ import ArticleOfTheDayComponent from './components/layouts/pageComponents/Articl
 import Dashboard from './components/layouts/pages/Dashboard';
 import Profile from './components/layouts/pageComponents/Profile';
 import Category from './components/layouts/pages/Category';
+// !! Import et renommage du composant Articles : Ce composant n'est pas export default ! (Voir fichier Articles.jsx) !!
+import { Articles as Test } from './components/layouts/pages/Articles';
 
 const App = () => {
     const [user] = useState(
@@ -48,6 +50,12 @@ const App = () => {
                         path="/dashboard/categories"
                         auth={user}
                         component={Category}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/dashboard/articles"
+                        auth={user}
+                        component={Test}
                     />
                 </Switch>
                 <Footer />

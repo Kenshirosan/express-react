@@ -5,18 +5,19 @@
 1. Tapez `npm init` et répondre aux questions.
 2. Créer un fichier `index.js` (le nom du fichier doit correspondre à la clé main dans `package.json`).
 3. On importe `express` et on crée une application avec `express()`.
-4. Créer un script npm start dans `package.json`.
-5. On install nodemon : `npm install --save-dev nodemon` ou `npm i -D nodemon`.
-6. On crée un script pour se servir de `nodemon`.
-7. On installe la librairie `dotenv`.
-8. On crée un fichier `.env` (CE FICHIER NE DOIT JAMAIS ETRE PARTAGE).
-9. Crée un fichier `.gitignore` et mettre dedans ce que voue voulez ignorer.
-10. Ensuite on peut faire `git init`.
-11. Créer un dossier routes.
-12. Dans le dossier routes : créer un dossier api.
-13. Dans le dossier api : créer un dossier users.
-14. Dans `index.js` : on peut commencer le routing.
-15. Dans le dossier route/api/users : On peut créer les routes et envoyer des réponses.
+4. Si on veut gérer le format JSON : il le spécifier ainsi : `app.use(express.json({limit: '10mb', extended: false}))`. Les options limit et extended sont là à titre d'exemple : Lisez la doc et modifiez-les selon vos besoins.
+5. Créer un script npm start dans `package.json`.
+6. On install nodemon : `npm install --save-dev nodemon` ou `npm i -D nodemon`.
+7. On crée un script pour se servir de `nodemon`.
+8. On installe la librairie `dotenv`.
+9. On crée un fichier `.env` (CE FICHIER NE DOIT JAMAIS ETRE PARTAGE).
+10. Crée un fichier `.gitignore` et mettre dedans ce que voue voulez ignorer.
+11. Ensuite on peut faire `git init`.
+12. Créer un dossier routes.
+13. Dans le dossier routes : créer un dossier api.
+14. Dans le dossier api : créer un dossier users.
+15. Dans `index.js` : on peut commencer le routing.
+16. Dans le dossier route/api/users : On peut créer les routes et envoyer des réponses.
     
 ## Installer React et faire communiquer le backend et le frontend.
 
@@ -106,8 +107,22 @@
 4. Quand on submit le form, on met à jour la catégorie.
 5. on gère la réponse du serveur.
 
-
-
-
 1. Pour chaque catégorie, un bouton supprimer.
 2. Quand on clique sur le bouton, on efface la catégorie après confirmation.
+
+
+
+### Exemple des étapes pour gérer les articles :
+
+#### Dans React
+1. Créer un formulaire (composant React) dans le client.
+2. Ce composant contient les fonctions suivantes :
+   1. Une fonction pour gérer les inputs (onChange) (title <input>, body <textarea>).
+   2. Une fonction pour envoyer les données vers le serveur (onSubmit).
+   3. state : Un state pour les données du formulaire.
+
+
+#### Sur le serveur 
+1. Créer une route dans le fichier index.js (racine du serveur).
+2. Créer le fichier correspondant à la route.
+3. Pouvoir enregistrer un article dans la BDD avec ce fichier.

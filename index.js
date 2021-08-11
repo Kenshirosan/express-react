@@ -26,6 +26,9 @@ app.use('/api/categories', require('./routes/api/categories')); // Read
 app.use('/api/categories/update', require('./routes/api/categories/update')); // Update
 app.use('/api/categories/destroy', require('./routes/api/categories/destroy')); // Delete
 
+// Articles Routes
+app.use('/api/articles/create', require('./routes/api/articles/create'));
+
 const port = process.env.PORT || 5000;
 
 app.listen(port);

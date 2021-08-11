@@ -6,7 +6,7 @@
 [x] - Optimisation : Extrait fetch dans une fonction réutilisable.  
 [ ] - Gestion des permissions et autorisations.  
 [ ] - Faire un dashboard : un admin et un pour les utilisateurs lambda
-[ ] - les inputs ne sont pas controllés e.target.reset() : On va faire des inputs controllés  
+[x] - les inputs ne sont pas controllés e.target.reset() : On va faire des inputs controllés  
 [ ] - Si possible, extraire la fonction maybeNotify.
 [ ] - Envoie d'un mail de confirmation de l'email
 
@@ -14,5 +14,5 @@
 [ ] - Gérer la validation.  
 [x] - Gérer les erreurs.  
 [ ] - Gestion des permissions et autorisations.  
-[ ] - Finir les modèles : Article, Category, Role  
+[x] - Finir les modèles : Article, Category, Role  
 [ ] - ?

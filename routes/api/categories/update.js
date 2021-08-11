@@ -5,7 +5,7 @@ const Category = require('../../../models/Category');
 
 /**
  * @params Request: req, Response: res
- * @route POST /api/categories/create
+ * @route POST /api/categories/update
  * @returns JSON
  */
 router.post('/', auth, async (req, res) => {

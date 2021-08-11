@@ -4,6 +4,7 @@ const auth = require('../../../middleware/auth');
 const User = require('../../../models/User');
 
 /**
+ * @method POST
  * @route '/api/users/destroy'
  */
 router.post('/', auth, async (req, res) => {

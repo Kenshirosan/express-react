@@ -79,7 +79,7 @@ const Category = () => {
                             Category Name
                         </label>
                         <input
-                            type="name"
+                            type="text"
                             name="name"
                             className="form-control"
                             id="name"
@@ -95,31 +95,44 @@ const Category = () => {
                 </form>
             </div>
 
-            <div className="col-md-3 card">
-                <div className="col-md-12">
-                    <h2>Catégories</h2>
-                    <hr />
-                    {/* MAP ici pour afficher toutes les catégories */}
-                    {categories.map(category => (
-                        <div key={category._id}>
-                            <h4 className="d-inline-block">{category.name}</h4>
-                            <button
-                                onClick={() => destroy(category._id)}
-                                type="button"
-                                className="btn btn-danger btn-sm mx-3"
-                            >
-                                Supprimer
-                            </button>
-                            <button
-                                onClick={() => edit(category._id)}
-                                type="button"
-                                className="btn btn-primary btn-sm mx-3"
-                            >
-                                Update
-                            </button>
-                        </div>
-                    ))}
-                </div>
+            <div className="col-md-3">
+                <h2 className="text-center">Catégories</h2>
+                <hr />
+                {/* MAP ici pour afficher toutes les catégories */}
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Mettre à jour</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {categories.map(category => (
+                            <tr key={category._id}>
+                                <td>{category.name}</td>
+                                <td>
+                                    <button
+                                        onClick={() => destroy(category._id)}
+                                        type="button"
+                                        className="btn btn-danger btn-sm mx-3"
+                                    >
+                                        Supprimer
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={() => edit(category._id)}
+                                        type="button"
+                                        className="btn btn-primary btn-sm mx-3"
+                                    >
+                                        Update
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
