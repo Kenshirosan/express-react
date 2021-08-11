@@ -6,7 +6,7 @@ const ArticleMain = ({ article }) => {
     return (
         <article className="blog-post">
             <h2 className="blog-post-title">
-                <Link to={`/article/${article.id}`}>{article.title}</Link>
+                <Link to={`/article/${article._id}`}>{article.title}</Link>
             </h2>
 
             <p className="blog-post-meta">
@@ -15,17 +15,6 @@ const ArticleMain = ({ article }) => {
             </p>
 
             <div dangerouslySetInnerHTML={{ __html: article.body }} />
-
-            {/*  react null pattern*/}
-            {article.list && article.list.length ? (
-                <ul>
-                    {article.list.map((elem, index) => (
-                        <li key={index}>{elem}</li>
-                    ))}
-                </ul>
-            ) : null}
-
-            <p>{article.footer}</p>
         </article>
     );
 };
