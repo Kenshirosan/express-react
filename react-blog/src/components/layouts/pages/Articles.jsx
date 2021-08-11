@@ -12,6 +12,22 @@ function Articles() {
     const [articles, setArticles] = useState([]);
     // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour
 
+    const modules = {
+        toolbar: [
+            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [
+                { list: 'ordered' },
+                { list: 'bullet' },
+                { indent: '-1' },
+                { indent: '+1' },
+            ],
+            ['link', 'image', 'video'],
+            ['clean'],
+        ],
+    };
+
     useEffect(() => {
         getArticles();
     }, []);
@@ -88,6 +104,7 @@ function Articles() {
                             name="body"
                             value={body}
                             id="body"
+                            modules={modules}
                             onChange={handleChangeQuill}
                         />
                     </div>
