@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Notification from '../layouts/common/Notification';
+import toastr from 'toastr';
 import LinkBack from '../layouts/common/LinkBack';
 import { validateEmail, fetchData } from '../../utilities';
 
@@ -10,11 +10,6 @@ const Register = () => {
         password: '',
         password2: '',
     });
-
-    // Pour notifications
-    const [notify, setNotify] = useState(false);
-    const [message, setMessage] = useState('');
-    const [level, setLevel] = useState('alert-success');
 
     // Récupérer les données des inputs
     const onChangeHandler = e => {
@@ -30,39 +25,36 @@ const Register = () => {
         // Validation
         // Vérifier que les mots de passe sont les mêmes
         // Vérifier que l'email est un email
+        //
         if (password2 !== password || !validateEmail(email)) {
-            return maybeNotify('Formulaire invalide', 'alert-danger');
+            return toastr.error(
+                'Formulaire invalide',
+                'Attention à ce que vous écrivez'
+            );
         }
 
         const data = await fetchData('/api/users/register', formData, 'POST');
 
         if (data.msg) {
-            setMessage(data.msg);
-
             setTimeout(() => {
                 window.location = '/login';
             }, 3000);
 
-            return maybeNotify(data.msg, 'alert-success');
+            return toastr.success(data.msg, "Oh Mais c'est super");
         }
 
-        return maybeNotify(data, 'alert-danger');
-    };
+        if (data) {
+            return toastr.error(
+                'Formulaire invalide',
+                'Attention à ce que vous écrivez'
+            );
+        }
 
-    const maybeNotify = (mess, level, timeout = 3000) => {
-        setNotify(true);
-        setMessage(mess);
-        setLevel(level);
-        setTimeout(() => {
-            setNotify(false);
-            setMessage('');
-        }, timeout);
+        return false;
     };
 
     return (
         <article className="container mt-5">
-            <Notification message={message} visible={notify} level={level} />
-
             <h2 className="text-center text-primary">Register Form</h2>
             <form className="row g-3 mb-5" onSubmit={onSubmitHandler}>
                 <div className="col-md-8">

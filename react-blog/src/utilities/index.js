@@ -1,3 +1,5 @@
+import toastr from 'toastr';
+
 // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
 function validateEmail(email) {
     const re =
@@ -26,6 +28,14 @@ async function fetchData(url, body = null, method = 'GET') {
     try {
         const res = await fetch(url, options);
         const data = await res.json();
+
+        if (data.errors) {
+            data.errors.forEach(error => {
+                toastr.error(error.msg, 'Un problème est survenu');
+            });
+
+            return false;
+        }
 
         if (data.err) {
             // throw : Envoie une exception : coupe l'exécution du code

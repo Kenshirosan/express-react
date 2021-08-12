@@ -46,6 +46,10 @@
 27. Implémentation des routes publiques et privées. (utilisateur authentifié ou pas)
 28. Mise en place d'un dashboard.
 
+
+## Sécurité
+29. Installer des validateurs : `npm i express-validator`
+
 ---
 
 # Création des JSONWEBTOKEN

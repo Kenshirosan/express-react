@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Notification from '../layouts/common/Notification';
+import toastr from 'toastr';
 import LinkBack from '../layouts/common/LinkBack';
 import { validateEmail, fetchData } from '../../utilities';
 
@@ -10,10 +10,6 @@ const Login = () => {
         password: '',
     });
 
-    // Pour notifications
-    const [notify, setNotify] = useState(false);
-    const [message, setMessage] = useState('');
-    const [level, setLevel] = useState('alert-success');
     // Récupérer les données des inputs
     const onChangeHandler = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,13 +18,13 @@ const Login = () => {
     const onSubmitHandler = async e => {
         e.preventDefault();
 
-        const { email } = formData;
+        const { email, password } = formData;
 
         // Validation
         // Vérifier que les mots de passe sont les mêmes
         // Vérifier que l'email est un email
-        if (!validateEmail(email)) {
-            return maybeNotify('Formulaire invalide', 'alert-danger');
+        if (!validateEmail(email) || password === '') {
+            return toastr.error('Formulaire invalide', 'PPPffffffff .....');
         }
 
         // Envoie sur le serveur
@@ -36,8 +32,6 @@ const Login = () => {
         const data = await fetchData('/api/users/login', formData, 'POST');
 
         if (data.msg) {
-            setMessage(data.msg);
-
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -46,26 +40,15 @@ const Login = () => {
                 window.location = '/';
             }, 3000);
 
-            return maybeNotify(data.msg, 'alert-success');
+            return toastr.success(data.msg, 'Woohoo !!');
         }
 
-        return maybeNotify(data, 'alert-danger');
+        return toastr.error(data, ' Vous ne passerez pas !');
     };
-
-    function maybeNotify(mess, level, timeout = 5000) {
-        setNotify(true);
-        setMessage(mess);
-        setLevel(level);
-        setTimeout(() => {
-            setNotify(false);
-            setMessage('');
-        }, timeout);
-    }
 
     return (
         <article className="container mt-5">
             {/**/}
-            <Notification message={message} visible={notify} level={level} />
 
             {localStorage.getItem('user') === null ? (
                 <Fragment>
