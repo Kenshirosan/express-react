@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Aside from '../pageComponents/Aside';
-import Hero from '../pageComponents/Hero';
-import SubHero from '../pageComponents/SubHero';
-import ArticleMain from '../pageComponents/ArticleMain';
+import Aside from './Aside';
+import Hero from './Hero';
+import SubHero from './SubHero';
+import ShowArticle from './ShowArticle';
 
 import {
     featured,
     mainTitle,
     blogTitle,
     postOfTheDayExcerpt,
-} from '../../data/data';
-import { fetchData } from '../../../utilities';
+} from '../../../data/data';
+import { fetchData } from '../../../../utilities';
 
 // Karim : Oui pour setArticles
 // Moi : NON
@@ -35,7 +35,7 @@ const Main = () => {
                     </h3>
 
                     {articles.map(article => (
-                        <ArticleMain key={article._id} article={article} />
+                        <ShowArticle key={article._id} article={article} />
                     ))}
                 </div>
                 <Aside />

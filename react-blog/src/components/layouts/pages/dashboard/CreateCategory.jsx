@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { fetchData } from '../../../utilities';
+import { fetchData } from '../../../../utilities';
 
-const Category = () => {
+const CreateCategory = () => {
     const [formData, setFormData] = useState({ name: '', id: '' }); // State pour le formulaire
     const [categories, setCategories] = useState([]); // State pour les catégories
     const [editMode, setEditMode] = useState(false);
@@ -138,4 +138,4 @@ const Category = () => {
     );
 };
 
-export default Category;
+export default CreateCategory;

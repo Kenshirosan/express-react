@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
 
-import Register from './components/forms/Register';
-import Login from './components/forms/Login';
-import Article from './components/layouts/pageComponents/Article';
-import Main from './components/layouts/pages/Main';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import Article from './components/layouts/pages/blog/Article';
+import Main from './components/layouts/pages/blog/Main';
 import Footer from './components/layouts/Footer';
-import ArticleOfTheDayComponent from './components/layouts/pageComponents/ArticleOfTheDayComponent';
-import Dashboard from './components/layouts/pages/Dashboard';
-import Profile from './components/layouts/pageComponents/Profile';
-import Category from './components/layouts/pages/Category';
+import ArticleOfTheDayComponent from './components/layouts/pages/blog/ArticleOfTheDayComponent';
+import Dashboard from './components/layouts/pages/dashboard/Dashboard';
+import UserInfo from './components/layouts/pages/dashboard/UserInfo';
+import CreateCategory from './components/layouts/pages/dashboard/CreateCategory';
 // !! Import et renommage du composant Articles : Ce composant n'est pas export default ! (Voir fichier Articles.jsx) !!
-import { Articles as Test } from './components/layouts/pages/Articles';
+import { CreateArticle as Test } from './components/layouts/pages/dashboard/CreateArticle';
 
 const App = () => {
     const [user] = useState(
@@ -43,13 +43,13 @@ const App = () => {
                     <PrivateRoute
                         path="/profile/me"
                         auth={user}
-                        component={Profile}
+                        component={UserInfo}
                     />
                     <PrivateRoute
                         exact
                         path="/dashboard/categories"
                         auth={user}
-                        component={Category}
+                        component={CreateCategory}
                     />
                     <PrivateRoute
                         exact

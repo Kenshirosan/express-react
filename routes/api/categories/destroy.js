@@ -13,8 +13,10 @@ router.post('/', auth, async (req, res) => {
         //
         const { id } = req.body;
 
-        await Category.findOneAndRemove({ _id: id });
+        // Si des articles sont associés a une catégorie, on empêche la suppression de la catégorie.
+
         // DELETE ONE CATEGORY
+        await Category.findOneAndRemove({ _id: id });
         //
         res.status(201).json({ msg: 'Catégorie effacée ! 🎆' });
     } catch (error) {

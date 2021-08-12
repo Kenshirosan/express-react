@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { fetchData } from '../../../utilities';
-import Notification from './Notification';
+import { fetchData } from '../../../../utilities';
+import Notification from '../../common/Notification';
 
-function Profile() {
+function UserInfo() {
     const [user, setUser] = useState({});
 
     const [formData, setFormData] = useState({
@@ -199,4 +199,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default UserInfo;

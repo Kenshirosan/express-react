@@ -14,5 +14,5 @@
 -[ ] Gérer la validation.  
 -[x] Gérer les erreurs.  
 -[ ] Gestion des permissions et autorisations.  
--[x] Finir les modèles : Article, Category, Role  
+-[x] Finir les modèles : Article, CreateCategory, Role  
 -[ ] ?

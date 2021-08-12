@@ -1,4 +1,4 @@
-import { archives, socialLinks, presentation } from '../../data/data';
+import { archives, socialLinks, presentation } from '../../../data/data';
 
 const Aside = () => {
     return (

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import Header from '../layouts/Header';
+import Header from '../layouts/pages/blog/Header';
 
 const PublicRoute = ({ component: Component, ...rest }) => (
     <Route

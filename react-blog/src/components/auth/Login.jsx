@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import Notification from '../layouts/pageComponents/Notification';
-import LinkBack from '../layouts/pageComponents/LinkBack';
+import Notification from '../layouts/common/Notification';
+import LinkBack from '../layouts/common/LinkBack';
 import { validateEmail, fetchData } from '../../utilities';
 
 const Login = () => {

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Header from '../layouts/pageComponents/dashboard/Header';
-import Nav from '../layouts/pageComponents/dashboard/Nav';
-import QuickActions from '../layouts/pageComponents/dashboard/QuickActions';
+import Header from '../layouts/pages/dashboard/common/Header';
+import Nav from '../layouts/pages/dashboard/common/Nav';
+import QuickActions from '../layouts/pages/dashboard/common/QuickActions';
 
 const PrivateRoute = ({ component: Component, auth: { email }, ...rest }) => (
     <Route

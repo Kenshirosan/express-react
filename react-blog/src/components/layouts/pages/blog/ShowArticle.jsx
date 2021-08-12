@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ArticleMain = ({ article }) => {
+const ShowArticle = ({ article }) => {
     return (
         <article className="blog-post">
             <h2 className="blog-post-title">
@@ -19,8 +19,8 @@ const ArticleMain = ({ article }) => {
     );
 };
 
-ArticleMain.propTypes = {
+ShowArticle.propTypes = {
     article: PropTypes.object.isRequired,
 };
 
-export default ArticleMain;
+export default ShowArticle;

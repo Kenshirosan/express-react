@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { fetchData } from '../../../utilities';
+import { fetchData } from '../../../../utilities';
 
-function Articles() {
+function CreateArticle() {
     const [formData, setFormData] = useState({
         title: '',
         body: '',
@@ -12,11 +12,11 @@ function Articles() {
     });
     const [categories, setCategories] = useState([]);
     const [articles, setArticles] = useState([]);
-    // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour
+    // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour.
 
     const modules = {
         toolbar: [
-            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ header: '1' }, { header: '2' }, { font: [] }], // Faire plus de titres
             [{ size: [] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [
@@ -25,7 +25,7 @@ function Articles() {
                 { indent: '-1' },
                 { indent: '+1' },
             ],
-            ['link', 'image', 'video'],
+            ['link', 'image', 'video'], // Faire qqchose pour que link fonctionne
             ['clean'],
         ],
     };
@@ -176,4 +176,4 @@ function Articles() {
 }
 
 // !! Si on veut pouvoir renommer les composants quand on les importe : Il ne faut pas les export default !!
-export { Articles };
+export { CreateArticle };
