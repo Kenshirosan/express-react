@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import toastr from 'toastr';
 import { fetchData } from '../../../../utilities';
 
 const CreateCategory = () => {
@@ -26,6 +27,15 @@ const CreateCategory = () => {
      */
     function onSubmitHandler(e) {
         e.preventDefault();
+
+        if (!formData.name || formData.name === '') {
+            setEditMode(false);
+            setFormData({ name: '' });
+            return toastr.error(
+                'Le nom de la catégorie est obligatoire',
+                '...'
+            );
+        }
 
         let action = 'create';
 

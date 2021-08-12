@@ -56,6 +56,9 @@ function CreateArticle() {
         });
     }
 
+    // Finir cette fonction :
+    // Réinitialiser le state
+    // Faire la validation aussi ici
     function onSubmitHandler(e) {
         e.preventDefault();
 
@@ -64,11 +67,14 @@ function CreateArticle() {
         // Si on est en mode mise à jour action = autre chose
 
         fetchData(`/api/articles/${action}`, formData, 'POST').then(data => {
-            toastr.success('Article Créé !', 'Woohooo !!');
-            getArticles();
+            if (data) {
+                toastr.success('Article Créé !', 'Woohooo !!');
+                getArticles();
+            }
         });
     }
 
+    // Finir cette fonction
     function editArticle(id, e) {
         e.preventDefault();
 
