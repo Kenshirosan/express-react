@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../../middleware/auth');
+const isAuthor = require('../../../middleware/isAuthor');
 const Article = require('../../../models/Article');
 
 /**
@@ -13,6 +14,7 @@ router.post(
     '/',
     [
         auth,
+        isAuthor,
         [
             check('title', 'Le titre est obligatoire').not().isEmpty().escape(),
             check('body', 'Le contenu est obligatoire')

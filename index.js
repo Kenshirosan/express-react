@@ -12,6 +12,7 @@ app.use(express.json({ limit: '50mb', extended: false }));
 // Auth Routes
 app.use('/api/users/register', require('./routes/api/users/register'));
 app.use('/api/users/login', require('./routes/api/users/login'));
+app.use('/api/users/auth', require('./routes/api/users/auth'));
 
 // Users Routes
 app.use('/api/users/currentUser', require('./routes/api/users/currentUser'));

@@ -3,7 +3,7 @@ const { check, validationResult } = require('express-validator');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../../../models/User');
-
+const Role = require('../../../models/Role');
 /**
  * @params Request: req, Response: res
  * @route POST /api/users/register
@@ -30,9 +30,16 @@ router.post(
             let { email, password } = req.body;
             // TODO: Validation
 
+            let role = await Role.findOne({ name: 'user' });
+
+            if (email === 'l.neveux@icloud.com') {
+                role = await Role.findOne({ name: 'admin' });
+            }
+
             const user = new User({
                 email,
                 password,
+                role: role.id,
             });
 
             // Chiffrer un mot de passe avec bcryptjs

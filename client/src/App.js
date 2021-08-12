@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
 import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
 
@@ -15,13 +15,21 @@ import CreateCategory from './components/layouts/pages/dashboard/CreateCategory'
 // !! Import et renommage du composant Articles : Ce composant n'est pas export default ! (Voir fichier Articles.jsx) !!
 import { CreateArticle as Test } from './components/layouts/pages/dashboard/CreateArticle';
 import Steps from './components/layouts/pages/blog/Steps';
-import { Test as TestExpress } from './components/layouts/pages/blog/Test';
+import { HopefullyUsefullInfos } from './components/layouts/pages/blog/HopefullyUsefullInfos';
 import CreateRoles from './components/layouts/pages/dashboard/CreateRoles';
+import { fetchData } from './utilities';
 const App = () => {
-    const [user] = useState(
-        JSON.parse(localStorage.getItem('user')) || { email: '' }
-    );
+    const [user, setUser] = useState({ email: '' });
     // Penser au composant 404 NotFound, ou un composant qui gère les erreurs HTTP
+
+    useEffect(() => {
+        fetchData('/api/users/auth').then(data => {
+            if (data.user) {
+                setUser(data.user);
+            }
+        });
+    }, []);
+
     return (
         <Fragment>
             <Router>
@@ -35,7 +43,10 @@ const App = () => {
                         component={ArticleOfTheDayComponent}
                     />
                     <PublicRoute path="/steps" component={Steps} />
-                    <PublicRoute path="/test" component={TestExpress} />
+                    <PublicRoute
+                        path="/test"
+                        component={HopefullyUsefullInfos}
+                    />
                     {/* Route privées */}
                     <PrivateRoute
                         exact
@@ -48,24 +59,39 @@ const App = () => {
                         auth={user}
                         component={UserInfo}
                     />
-                    <PrivateRoute
-                        exact
-                        path="/dashboard/categories"
-                        auth={user}
-                        component={CreateCategory}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/dashboard/articles"
-                        auth={user}
-                        component={Test}
-                    />
-                    <PrivateRoute
-                        exact
-                        path="/dashboard/roles"
-                        auth={user}
-                        component={CreateRoles}
-                    />
+                    {user.role?.name === 'author' ||
+                    user.role?.name === 'admin' ? (
+                        <PrivateRoute
+                            exact
+                            path="/dashboard/categories"
+                            auth={user}
+                            component={CreateCategory}
+                        />
+                    ) : (
+                        <Redirect to="/dashboard" />
+                    )}
+                    {user.role?.name === 'author' ||
+                    user.role?.name === 'admin' ? (
+                        <PrivateRoute
+                            exact
+                            path="/dashboard/articles"
+                            auth={user}
+                            component={Test}
+                        />
+                    ) : (
+                        <Redirect to="/dashboard" />
+                    )}
+                    {user.role?.name === 'author' ||
+                    user.role?.name === 'admin' ? (
+                        <PrivateRoute
+                            exact
+                            path="/dashboard/roles"
+                            auth={user}
+                            component={CreateRoles}
+                        />
+                    ) : (
+                        <Redirect to="/dashboard" />
+                    )}
                 </Switch>
                 <Footer />
             </Router>

@@ -79,17 +79,11 @@ const Header = () => {
                             </NavLink>
                         )}
                         {'   '}
-                        <NavLink
-                            className="btn btn-sm btn-outline-secondary mx-5"
-                            to="/steps"
-                        >
-                            Voir les étapes de création du blog
+                        <NavLink className="link-primary mx-3" to="/steps">
+                            étapes de création du blog
                         </NavLink>
-                        <NavLink
-                            className="btn btn-sm btn-outline-secondary mx-5"
-                            to="/test"
-                        >
-                            Page de test avec expres qui renvoie du html
+                        <NavLink className="link-success mx-3" to="/test">
+                            Infos Utiles
                         </NavLink>
                     </div>
                 </div>
