@@ -32,6 +32,7 @@
 
 21. Créer un README.md bien précis et documenté.
 22. Créer un repo git et l'envoyer sur github. (Choix URL : `git@github.com:<userName>/<repoName>.git`)
+23. **_Penser à faire des petits commit et push très souvent pour identifier les bugs et problèmes plus rapidement et au cas ou un désastre se produit avec l'ordinateur, on ne perd pas beaucoup de travail_**.
 
 
 ## Installation de mongoose
