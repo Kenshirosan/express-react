@@ -29,6 +29,12 @@ app.use('/api/categories/destroy', require('./routes/api/categories/destroy')); 
 app.use('/api/articles/create', require('./routes/api/articles/create'));
 app.use('/api/articles', require('./routes/api/articles'));
 
+// Roles Routes
+app.use('/api/roles/create', require('./routes/api/roles/create'));
+app.use('/api/roles', require('./routes/api/roles'));
+app.use('/api/roles/update', require('./routes/api/roles/update'));
+app.use('/api/roles/destroy', require('./routes/api/roles/destroy'));
+
 // Parse markdown to HTML
 app.use('/api/steps', require('./routes/api/steps'));
 app.use('/api/test', require('./routes/api/steps/test'));

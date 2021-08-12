@@ -16,7 +16,7 @@ import CreateCategory from './components/layouts/pages/dashboard/CreateCategory'
 import { CreateArticle as Test } from './components/layouts/pages/dashboard/CreateArticle';
 import Steps from './components/layouts/pages/blog/Steps';
 import { Test as TestExpress } from './components/layouts/pages/blog/Test';
-
+import CreateRoles from './components/layouts/pages/dashboard/CreateRoles';
 const App = () => {
     const [user] = useState(
         JSON.parse(localStorage.getItem('user')) || { email: '' }
@@ -59,6 +59,12 @@ const App = () => {
                         path="/dashboard/articles"
                         auth={user}
                         component={Test}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/dashboard/roles"
+                        auth={user}
+                        component={CreateRoles}
                     />
                 </Switch>
                 <Footer />

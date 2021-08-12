@@ -2,27 +2,25 @@ import React, { useEffect, useState } from 'react';
 import toastr from 'toastr';
 import { fetchData } from '../../../../utilities';
 
-const CreateCategory = () => {
+const CreateRoles = () => {
     const [formData, setFormData] = useState({ name: '', id: '' }); // State pour le formulaire
-    const [categories, setCategories] = useState([]); // State pour les catégories
+    const [roles, setRoles] = useState([]); // State pour les catégories
     const [editMode, setEditMode] = useState(false);
 
     function onChangeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    function getCategories() {
-        fetchData('/api/categories').then(data =>
-            setCategories(data.categories)
-        );
+    function getRoles() {
+        fetchData('/api/roles').then(data => setRoles(data.roles));
     }
     // Récupérer les catégories au chargement du composant
     useEffect(() => {
-        getCategories();
+        getRoles();
     }, []);
 
     /**
-     * @desc fonction qui va permettre de créé ou de mettre à jour les catégories
+     * @desc fonction qui va permettre de créé ou de mettre à jour les rôles
      * @param e event
      */
     function onSubmitHandler(e) {
@@ -31,10 +29,7 @@ const CreateCategory = () => {
         if (!formData.name || formData.name === '') {
             setEditMode(false);
             setFormData({ name: '' });
-            return toastr.error(
-                'Le nom de la catégorie est obligatoire',
-                '...'
-            );
+            return toastr.error('Le nom du rôle est obligatoire', '...');
         }
 
         let action = 'create';
@@ -44,12 +39,10 @@ const CreateCategory = () => {
             action = 'update';
         }
 
-        fetchData(`/api/categories/${action}`, formData, 'POST').then(data => {
+        fetchData(`/api/roles/${action}`, formData, 'POST').then(data => {
             setFormData({ name: '' });
-            getCategories();
-
+            getRoles();
             setEditMode(false);
-
             if (data instanceof Object) {
                 return toastr.success(data.msg, '...');
             }
@@ -59,24 +52,18 @@ const CreateCategory = () => {
     }
 
     function edit(id) {
-        const cat = categories.find(category => category._id === id);
+        const role = roles.find(role => role._id === id);
 
-        setFormData({ name: cat.name, id: cat._id });
+        setFormData({ name: role.name, id: role._id });
 
         setEditMode(true);
     }
 
     function destroy(id) {
         if (window.confirm('Etes vous sur ?')) {
-            fetchData('/api/categories/destroy', { id }, 'POST').then(data => {
-                // Filtre les catégories et on enlève celle dont l'id correspond au param id
-                // const newCategories = categories.filter(
-                //     category => category._id !== id
-                // );
-                toastr.success('Catégorie effacé !', '...');
-                return getCategories();
-
-                // return setCategories(newCategories);
+            fetchData('/api/roles/destroy', { id }, 'POST').then(data => {
+                toastr.success('Rôle effacé !', '...');
+                return getRoles();
             });
         }
 
@@ -88,11 +75,11 @@ const CreateCategory = () => {
     return (
         <div className="row">
             <div className="col-md-6">
-                <h2>Ajouter une catégorie</h2>
+                <h2>Ajouter un rôle</h2>
                 <form className="row g-3 mb-5" onSubmit={onSubmitHandler}>
                     <div className="col-md-8">
                         <label htmlFor="name" className="form-label">
-                            Category Name
+                            Rôle Name
                         </label>
                         <input
                             type="text"
@@ -112,41 +99,42 @@ const CreateCategory = () => {
             </div>
 
             <div className="col-md-3">
-                <h2 className="text-center">Catégories</h2>
+                <h2 className="text-center">Rôle</h2>
                 <hr />
                 {/* MAP ici pour afficher toutes les catégories */}
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>Catégorie</th>
+                            <th>Rôle</th>
                             <th>Mettre à jour</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {categories.map(category => (
-                            <tr key={category._id}>
-                                <td>{category.name}</td>
-                                <td>
-                                    <button
-                                        onClick={() => destroy(category._id)}
-                                        type="button"
-                                        className="btn btn-danger btn-sm mx-3"
-                                    >
-                                        Supprimer
-                                    </button>
-                                </td>
-                                <td>
-                                    <button
-                                        onClick={() => edit(category._id)}
-                                        type="button"
-                                        className="btn btn-primary btn-sm mx-3"
-                                    >
-                                        Update
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                        {roles &&
+                            roles.map(role => (
+                                <tr key={role._id}>
+                                    <td>{role.name}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => destroy(role._id)}
+                                            type="button"
+                                            className="btn btn-danger btn-sm mx-3"
+                                        >
+                                            Supprimer
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            onClick={() => edit(role._id)}
+                                            type="button"
+                                            className="btn btn-primary btn-sm mx-3"
+                                        >
+                                            Update
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>
@@ -154,4 +142,4 @@ const CreateCategory = () => {
     );
 };
 
-export default CreateCategory;
+export default CreateRoles;

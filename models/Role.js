@@ -5,6 +5,7 @@ const RoleSchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     createdAt: {
         type: Date,

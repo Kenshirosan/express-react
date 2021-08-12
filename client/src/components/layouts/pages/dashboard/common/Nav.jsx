@@ -38,6 +38,16 @@ const Nav = () => {
                     </li>
                     <li className="nav-item">
                         <NavLink
+                            className="nav-link"
+                            aria-current="page"
+                            to="/dashboard/roles"
+                        >
+                            <span className="fas fa-user-lock" /> Gestion des
+                            Rôles
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink
                             exact
                             className="nav-link"
                             aria-current="page"
