@@ -12,7 +12,7 @@ router.post('/', auth, async (req, res) => {
     try {
         //
         const { title, body, metaDescription, category } = req.body;
-        console.log(category);
+
         if (!category || category === 'Open this select menu') {
             res.status(500).json({ err: 'Vous devez sélectionner une catégorie' });
         }

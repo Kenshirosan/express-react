@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
+import toastr from 'toastr';
 import 'react-quill/dist/quill.snow.css';
 import { fetchData } from '../../../../utilities';
 
@@ -42,7 +43,6 @@ function CreateArticle() {
     }
 
     function onChangeHandler(e) {
-        console.log(e);
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
@@ -63,9 +63,10 @@ function CreateArticle() {
 
         // Si on est en mode mise à jour action = autre chose
 
-        fetchData(`/api/articles/${action}`, formData, 'POST').then(data =>
-            getArticles()
-        );
+        fetchData(`/api/articles/${action}`, formData, 'POST').then(data => {
+            toastr.success('Article Créé !', 'Woohooo !!');
+            getArticles();
+        });
     }
 
     function editArticle(id, e) {

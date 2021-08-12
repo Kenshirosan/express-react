@@ -16,7 +16,7 @@ router.post(
         check('password', 'Le mot de passe ne convient pas')
             .not()
             .isEmpty()
-            .isLength({ min: 6 })
+            .isLength({ min: 4 })
             .escape(),
     ],
     async (req, res) => {
@@ -30,9 +30,6 @@ router.post(
         // Récuperer l'utilisateur dans la base de données grâce à son email.
         // Mongoose
 
-        console.log(password);
-
-        return;
         try {
             const user = await User.findOne({ email });
 
