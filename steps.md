@@ -47,9 +47,12 @@
 28. Mise en place d'un dashboard.
 
 
-## Sécurité
+## Sécurité sur le serveur
 29. Installer des validateurs : `npm i express-validator`
 30. Les points importants de la validation : le .escape() pour convertir le HTML. Ne surtout pas l'oublier !!
+
+## Sécurité sur le client
+31. Installer ? `npm i ?`
 
 ---
 
@@ -83,7 +86,7 @@
    - Pour mettre à jour une ressource : un formulaire et un identifiant.
    - Pour effacer une ressource : un identifiant.
    - Pour lire / afficher une ressource : un identifiant.
-   - Pour lire /afficher toutes les données liées à une ressource : nom de la ressource.
+   - Pour lire / afficher toutes les données liées à une ressource : nom de la ressource.
 3. Quand on commence à gérer une resource, on la finit.
 
 
@@ -92,8 +95,8 @@
 1. Client
    - [x] On crée une route pour accéder à la page de gestion des catégories.
    - [x] On crée un composant qui contient un formulaire de création d'une catégorie.
-   -  [x] On crée un formulaire de mise à jour des catégories. (?).
-   -  [x] On crée un formulaire pour effacer une catégorie (? pour les articles appartenant à cette catégorie, automatiquement dans les archives (par défaut)).
+   - [x] On crée un formulaire de mise à jour des catégories. (?).
+   - [x] On crée un formulaire pour effacer une catégorie (? pour les articles appartenant à cette catégorie, automatiquement dans les archives (par défaut)).
 
 2. Serveur
    - [x] On crée une route et une fonction qui sert à créer la catégorie.
@@ -130,4 +133,5 @@
 #### Sur le serveur 
 - [x] Créer une route dans le fichier index.js (racine du serveur).
 - [x] Créer le fichier correspondant à la route.
+- [x] Valider la validité les requêtes avec exress-validator.
 - [x] Pouvoir enregistrer un article dans la BDD avec ce fichier.
