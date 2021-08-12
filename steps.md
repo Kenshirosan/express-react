@@ -49,6 +49,7 @@
 
 ## Sécurité
 29. Installer des validateurs : `npm i express-validator`
+30. Les points importants de la validation : le .escape() pour convertir le HTML. Ne surtout pas l'oublier !!
 
 ---
 

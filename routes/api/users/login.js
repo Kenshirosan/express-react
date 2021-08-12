@@ -29,6 +29,10 @@ router.post(
         const { email, password } = req.body;
         // Récuperer l'utilisateur dans la base de données grâce à son email.
         // Mongoose
+
+        console.log(password);
+
+        return;
         try {
             const user = await User.findOne({ email });
 
@@ -91,3 +95,7 @@ router.post(
 );
 
 module.exports = router;
+
+// Avec .escape on convertit les caractères spéciaux en entité HTML.
+// <script>alert('alerte de sécurité')</script>; // Avant conversion
+// &lt;script&gt;alert(&#x27;alerte de sécurité&#x27;)&lt;&#x2F;script&gt; // Après conversion
