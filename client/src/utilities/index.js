@@ -27,7 +27,15 @@ async function fetchData(url, body = null, method = 'GET') {
 
     try {
         const res = await fetch(url, options);
-        const data = await res.json();
+
+        let data = '';
+
+        // Vérification du Content-type pour parser correctement les données venant du serveur
+        if (res.headers.get('Content-type') === 'text/html; charset=utf-8') {
+            data = await res.text();
+        } else {
+            data = await res.json();
+        }
 
         if (data.errors) {
             data.errors.forEach(error => {

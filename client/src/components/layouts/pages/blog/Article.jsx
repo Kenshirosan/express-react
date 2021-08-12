@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LinkBack from '../../common/LinkBack';
 import { fetchData } from '../../../../utilities';
+import DOMPurify from 'dompurify';
 
 const Article = () => {
     const [article, setArticle] = useState({});
@@ -24,7 +25,11 @@ const Article = () => {
                         <a href="!#">{article.categoryId?.name}</a>
                     </p>
 
-                    <div dangerouslySetInnerHTML={{ __html: article.body }} />
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(article.body),
+                        }}
+                    />
 
                     <LinkBack />
                 </article>

@@ -14,6 +14,8 @@ import UserInfo from './components/layouts/pages/dashboard/UserInfo';
 import CreateCategory from './components/layouts/pages/dashboard/CreateCategory';
 // !! Import et renommage du composant Articles : Ce composant n'est pas export default ! (Voir fichier Articles.jsx) !!
 import { CreateArticle as Test } from './components/layouts/pages/dashboard/CreateArticle';
+import Steps from './components/layouts/pages/blog/Steps';
+import { Test as TestExpress } from './components/layouts/pages/blog/Test';
 
 const App = () => {
     const [user] = useState(
@@ -32,7 +34,8 @@ const App = () => {
                         path="/featured/:id"
                         component={ArticleOfTheDayComponent}
                     />
-
+                    <PublicRoute path="/steps" component={Steps} />
+                    <PublicRoute path="/test" component={TestExpress} />
                     {/* Route privées */}
                     <PrivateRoute
                         exact

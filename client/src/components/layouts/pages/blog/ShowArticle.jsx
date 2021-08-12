@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import DOMPurify from 'dompurify';
 const ShowArticle = ({ article }) => {
     return (
         <article className="blog-post">
@@ -14,7 +14,11 @@ const ShowArticle = ({ article }) => {
                 <a href="/">{article.userId?.name}</a>
             </p>
 
-            <div dangerouslySetInnerHTML={{ __html: article.body }} />
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(article.body),
+                }}
+            />
         </article>
     );
 };

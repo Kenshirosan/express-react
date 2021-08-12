@@ -78,6 +78,19 @@ const Header = () => {
                                 Logout
                             </NavLink>
                         )}
+                        {'   '}
+                        <NavLink
+                            className="btn btn-sm btn-outline-secondary mx-5"
+                            to="/steps"
+                        >
+                            Voir les étapes de création du blog
+                        </NavLink>
+                        <NavLink
+                            className="btn btn-sm btn-outline-secondary mx-5"
+                            to="/test"
+                        >
+                            Page de test avec expres qui renvoie du html
+                        </NavLink>
                     </div>
                 </div>
             </header>

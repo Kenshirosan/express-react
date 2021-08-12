@@ -53,7 +53,8 @@
 30. Les points importants de la validation : le .escape() pour convertir le HTML. Ne surtout pas l'oublier !!
 
 ## Sécurité sur le client
-31. Installer ? `npm i ?`
+31. Installer la librairie DOMPurify `npm i dompurify`
+32. Utiliser la méthode `DOMPURIFY.sanitze(html)` pour nettoyer les HTML que vous souhaitez afficher.
 
 ---
 
@@ -70,7 +71,7 @@
 
 # Créer une base de données mongoDB
 1. Ouvrir Compass.
-2. On crée un base de données plus une collection.
+2. On crée une base de données plus une collection.
 3. On switch sur la nouvelle base de données avec `mongoSH` (le terminal en bas dans compass) : `use <dbName>`.
 4. Vous exécutez la command `db.createUser({ <options> })`.
 5. Vous redémarrez Compass.
@@ -126,7 +127,7 @@
 #### Dans React
 - [x] Créer un formulaire (composant React) dans le client.
 - [x] Ce composant contient les fonctions suivantes :
-- [x] Une fonction pour gérer les inputs (onChange) (title <input>, body <textarea>).
+- [x] Une fonction pour gérer les inputs (onChange) (title input, body textarea).
 - [x] Une fonction pour envoyer les données vers le serveur (onSubmit).
 - [x] State : Un state pour les données du formulaire.
 
@@ -136,3 +137,5 @@
 - [x] Créer le fichier correspondant à la route.
 - [x] Valider la validité les requêtes avec exress-validator.
 - [x] Pouvoir enregistrer un article dans la BDD avec ce fichier.
+
+

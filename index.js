@@ -10,7 +10,6 @@ dbconnexion();
 app.use(express.json({ limit: '50mb', extended: false }));
 
 // Auth Routes
-
 app.use('/api/users/register', require('./routes/api/users/register'));
 app.use('/api/users/login', require('./routes/api/users/login'));
 
@@ -30,6 +29,9 @@ app.use('/api/categories/destroy', require('./routes/api/categories/destroy')); 
 app.use('/api/articles/create', require('./routes/api/articles/create'));
 app.use('/api/articles', require('./routes/api/articles'));
 
+// Parse markdown to HTML
+app.use('/api/steps', require('./routes/api/steps'));
+app.use('/api/test', require('./routes/api/steps/test'));
 const port = process.env.PORT || 5000;
 
 app.listen(port);
