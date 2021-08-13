@@ -55,14 +55,13 @@ router.post(
                 return jwt.sign(
                     payload,
                     process.env.APP_SECRET,
-                    { expiresIn: 36000 }, // Validité du token en seconde || -1 pour validité infinie
+                    { expiresIn: 36000 }, // Validité du token en seconde || Voir doc, beaucoup d'options
                     function (err, token) {
                         if (err) throw err;
 
                         return res.status(200).json({
                             msg: 'Vous êtes maintenant connecté ! 🎆',
                             token,
-                            user, // Ajout de l'user dans la réponse : temporaire
                         });
                     }
                 );

@@ -8,6 +8,7 @@
         "start": "node index.js",
         "dev": "nodemon index.js",
         "client": "npm start --prefix client",
+        "init": "npm install && npm install --prefix client",
         "watch": "concurrently \"npm run dev\" \"npm run client\""
     },
     "author": "Laurent",
@@ -35,13 +36,6 @@
         "bracketSpacing": true,
         "jsxBracketSameLine": false,
         "overrides": [
-            {
-                "files": "*.vue",
-                "options": {
-                    "parser": "vue",
-                    "vueIndentScriptAndStyle": true
-                }
-            },
             {
                 "files": "*.js",
                 "options": {

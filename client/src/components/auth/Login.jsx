@@ -33,7 +33,6 @@ const Login = () => {
 
         if (data.msg) {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
 
             // Redirection avec timeOut : pas idéal
             setTimeout(function () {

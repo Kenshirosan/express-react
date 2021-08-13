@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
         // GET ALL ARTICLES
         const articles = await Article.find().populate('userId', 'name'); // Comment omettre le mot de passe avec cette requête.
         //
+
         res.status(200).json({ articles });
     } catch (error) {
         let messages = [];

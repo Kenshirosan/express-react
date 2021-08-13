@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import toastr from 'toastr';
 import 'react-quill/dist/quill.snow.css';
 import { fetchData } from '../../../../utilities';
 
 function CreateArticle() {
-    const [formData, setFormData] = useState({
+    const initialState = {
         title: '',
         body: '',
         metaDescription: '',
         category: '',
-    });
+    };
+
+    const [formData, setFormData] = useState(initialState);
     const [categories, setCategories] = useState([]);
     const [articles, setArticles] = useState([]);
+    const [article, setArticle] = useState({});
+    const [editMode, setEditMode] = useState(false);
+
+    const selectRef = useRef(); // Sert à garder en mémoire une référence d'un objet JSX
+
     // Avoir un boolean pour décider si le formulaire crée un article ou s'il le met à jour.
 
     const modules = {
@@ -35,6 +42,19 @@ function CreateArticle() {
         getArticles();
         getCategories();
     }, []);
+
+    useEffect(() => {
+        setFormData(() => {
+            return {
+                title: article.title,
+                metaDescription: article.metaDescription,
+                category: article.categoryId?._id,
+                body: article.body,
+            };
+        });
+        //
+        selectRef.current.value = article.categoryId?._id;
+    }, [article]);
 
     function getCategories() {
         fetchData('/api/categories').then(data =>
@@ -65,11 +85,19 @@ function CreateArticle() {
         let action = 'create';
 
         // Si on est en mode mise à jour action = autre chose
+        if (editMode) {
+            action = 'update';
+            formData.id = article._id;
+        }
 
         fetchData(`/api/articles/${action}`, formData, 'POST').then(data => {
             if (data) {
-                toastr.success('Article Créé !', 'Woohooo !!');
+                toastr.success(data.msg, 'Woohooo !!');
                 getArticles();
+                setFormData(initialState);
+                setArticle({});
+                setEditMode(false);
+                selectRef.current.value = 'Open this select menu';
             }
         });
     }
@@ -78,8 +106,14 @@ function CreateArticle() {
     function editArticle(id, e) {
         e.preventDefault();
 
-        console.log(id);
+        setArticle(articles.find(article => article._id === id));
+
+        fetchData(`/api/articles/${id}`).then(data => {
+            setArticle(data.article);
+            setEditMode(true);
+        });
     }
+
     const { title, body, metaDescription } = formData;
 
     return (
@@ -118,6 +152,7 @@ function CreateArticle() {
                             Catégories de l'article
                         </label>
                         <select
+                            ref={selectRef}
                             className="form-select"
                             aria-label="Default select example"
                             name="category"
@@ -142,7 +177,7 @@ function CreateArticle() {
                         </label>
                         <ReactQuill
                             name="body"
-                            value={body}
+                            value={body || ''}
                             id="body"
                             modules={modules}
                             onChange={handleChangeQuill}
