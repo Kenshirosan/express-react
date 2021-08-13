@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { param, check } = require('express-validator');
 const Article = require('../../../models/Article');
 
 /**
@@ -38,10 +39,11 @@ router.get('/', async (req, res) => {
 
 /**
  * @params Request: req, Response: res
- * @route GET /api/article/:id
+ * @route GET /api/article/:id Le param s'appelle query string, Pensez impérativement à échapper ,les query string.
+ * Note that the query string (name/value pairs) is sent in the URL of a GET
  * @returns JSON
  */
-router.get('/:id', async (req, res) => {
+router.get('/:id', [param('id', 'message erreur').escape()], async (req, res) => {
     try {
         // GET ALL ARTICLES
 
