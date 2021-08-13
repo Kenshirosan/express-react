@@ -44,6 +44,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         // GET ALL ARTICLES
+
+        // Mission : échapper id, faire en sorte de convertir les caractères spéciaux.
+
         const { id } = req.params;
 
         const article = await Article.findOne({ _id: id })

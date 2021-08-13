@@ -18,9 +18,11 @@ import Steps from './components/layouts/pages/blog/Steps';
 import { HopefullyUsefullInfos } from './components/layouts/pages/blog/HopefullyUsefullInfos';
 import CreateRoles from './components/layouts/pages/dashboard/CreateRoles';
 import { fetchData } from './utilities';
+
 const App = () => {
-    const [user, setUser] = useState({ email: '' });
     // Penser au composant 404 NotFound, ou un composant qui gère les erreurs HTTP
+    const [user, setUser] = useState({ email: '' });
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     useEffect(() => {
         fetchData('/api/users/auth').then(data => {
@@ -28,6 +30,7 @@ const App = () => {
                 setUser(data.user);
             }
         });
+        setToken(localStorage.getItem('token'));
     }, []);
 
     return (
@@ -51,12 +54,12 @@ const App = () => {
                     <PrivateRoute
                         exact
                         path="/dashboard"
-                        auth={user}
+                        auth={token}
                         component={Dashboard}
                     />
                     <PrivateRoute
                         path="/profile/me"
-                        auth={user}
+                        auth={token}
                         component={UserInfo}
                     />
                     {user.role?.name === 'author' ||
@@ -64,7 +67,7 @@ const App = () => {
                         <PrivateRoute
                             exact
                             path="/dashboard/categories"
-                            auth={user}
+                            auth={token}
                             component={CreateCategory}
                         />
                     ) : (
@@ -75,7 +78,7 @@ const App = () => {
                         <PrivateRoute
                             exact
                             path="/dashboard/articles"
-                            auth={user}
+                            auth={token}
                             component={Test}
                         />
                     ) : (
@@ -86,7 +89,7 @@ const App = () => {
                         <PrivateRoute
                             exact
                             path="/dashboard/roles"
-                            auth={user}
+                            auth={token}
                             component={CreateRoles}
                         />
                     ) : (

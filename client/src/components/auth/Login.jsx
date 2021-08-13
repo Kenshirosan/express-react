@@ -49,7 +49,7 @@ const Login = () => {
         <article className="container mt-5">
             {/**/}
 
-            {localStorage.getItem('user') === null ? (
+            {localStorage.getItem('token') === null ? (
                 <Fragment>
                     <h2 className="text-center text-primary">Login Form</h2>
                     <form className="row g-3 mb-5" onSubmit={onSubmitHandler}>

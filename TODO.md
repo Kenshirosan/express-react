@@ -10,6 +10,8 @@
 - [x] On a mis toastr.
 - [ ] Envoie d'un mail de confirmation de l'email
 - [ ] Faire un HOC (Higher Order Component)
+- [ ] Enlever les ternaires dans App.js, n'en garder qu'un.
+- [ ] 
 
 ## Serveur :
 - [x] Gérer la validation.  

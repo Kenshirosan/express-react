@@ -4,11 +4,11 @@ import Header from '../layouts/pages/dashboard/common/Header';
 import Nav from '../layouts/pages/dashboard/common/Nav';
 import QuickActions from '../layouts/pages/dashboard/common/QuickActions';
 
-const PrivateRoute = ({ component: Component, auth: { email }, ...rest }) => (
+const PrivateRoute = ({ component: Component, auth, ...rest }) => (
     <Route
         {...rest}
         render={props =>
-            !email ? (
+            !auth ? (
                 <Redirect to="/login" />
             ) : (
                 <Fragment>
