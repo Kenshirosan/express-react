@@ -8,18 +8,18 @@ const HopefullyUsefullInfos = () => {
                             <a
                                 rel="noreferrer"
                                 target="_blank"
-                                href="https://www.javatpoint.com/javascript-mcq"
+                                href="https://javascript.info/"
                             >
-                                JavaScript QCM
+                                JavaScript Infos
                             </a>
                         </li>
                         <li>
                             <a
                                 rel="noreferrer"
                                 target="_blank"
-                                href="https://javascript.info/"
+                                href="https://www.javatpoint.com/javascript-mcq"
                             >
-                                JavaScript Infos
+                                JavaScript QCM
                             </a>
                         </li>
                         <li>
@@ -41,13 +41,76 @@ const HopefullyUsefullInfos = () => {
                             </a>
                         </li>
                         <li>
-                            <a href=""></a>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://reddit.com/r/javascript"
+                            >
+                                Reddit JS
+                            </a>
                         </li>
                         <li>
-                            <a href=""></a>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://reddit.com/r/webdev"
+                            >
+                                Reddit Web Dev
+                            </a>
                         </li>
                         <li>
-                            <a href=""></a>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://reddit.com/r/react"
+                            >
+                                Reddit React
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://reddit.com/r/reactnative"
+                            >
+                                Reddit React Native
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://reddit.com/r/vuejs"
+                            >
+                                Reddit Vuejs
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://getbootstrap.com"
+                            >
+                                Bootstrap
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://bulma.io/"
+                            >
+                                Bulma CSS
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                rel="noreferrer"
+                                target="_blank"
+                                href="https://tailwindcss.com/"
+                            >
+                                Tailwind CSS
+                            </a>
                         </li>
                     </ul>
                 </div>
