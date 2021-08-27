@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
         // GET ALL ARTICLES
         const articles = await Article.find().populate('userId', 'name'); // Comment omettre le mot de passe avec cette requête.
         //
+        const archiveDates = await Article.getDates(); // Methiode static donc pas besoin d'instance de la class Article pour appeler la methode
 
-        res.status(200).json({ articles });
+        res.status(200).json({ articles, archiveDates });
     } catch (error) {
         let messages = [];
 

@@ -17,9 +17,13 @@ import { fetchData } from '../../../../utilities';
 
 const Main = () => {
     const [articles, setArticles] = useState([]);
+    const [archivesDates, setArchiveDates] = useState();
 
     useEffect(() => {
-        fetchData('/api/articles').then(data => setArticles(data.articles));
+        fetchData('/api/articles').then(data => {
+            setArticles(data.articles);
+            setArchiveDates(data.archiveDates);
+        });
     }, []);
 
     return (
@@ -38,7 +42,7 @@ const Main = () => {
                         <ShowArticle key={article._id} article={article} />
                     ))}
                 </div>
-                <Aside />
+                <Aside archiveDates={archivesDates} />
             </div>
         </main>
     );

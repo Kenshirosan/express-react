@@ -1,6 +1,6 @@
-import { archives, socialLinks, presentation } from '../../../data/data';
+import { socialLinks, presentation } from '../../../data/data';
 
-const Aside = () => {
+const Aside = ({ archiveDates }) => {
     return (
         <div className="col-md-4">
             <div className="position-sticky" style={{ top: '2rem' }}>
@@ -13,12 +13,13 @@ const Aside = () => {
                     <h4 className="fst-italic">Archives</h4>
                     <ol className="list-unstyled mb-0">
                         {/* */}
-                        {/* map ici avec les données qui viennent du fichier data */}
-                        {archives.map((archive, index) => (
-                            <li key={index}>
-                                <a href="/">{archive}</a>
-                            </li>
-                        ))}
+                        {/* map ici avec les données qui venaient du fichier data, qui viennent maintenant de mongoDB */}
+                        {archiveDates &&
+                            archiveDates.map((date, index) => (
+                                <li key={index}>
+                                    <a href="/">{date._id}</a>
+                                </li>
+                            ))}
                     </ol>
                 </div>
 

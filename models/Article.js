@@ -34,4 +34,14 @@ const ArticleSchema = new Schema({
     },
 });
 
+// methode static pour extraire les dates de creation des articles et les afficher dans Le composant archives. (equivalent de GROUP BY en SQL)
+// On s'en sert dans api/articles/index.js
+ArticleSchema.statics.getDates = async function () {
+    return await this.aggregate([
+        { $project: { month: { $substr: ['$createdAt', 0, 7] } } },
+        { $group: { _id: '$month', number: { $sum: 1 } } },
+        { $sort: { _id: 1 } },
+    ]);
+};
+
 module.exports = Article = mongoose.model('article', ArticleSchema);
