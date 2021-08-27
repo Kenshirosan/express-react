@@ -36,6 +36,7 @@ const ArticleSchema = new Schema({
 
 // methode static pour extraire les dates de creation des articles et les afficher dans Le composant archives. (equivalent de GROUP BY en SQL)
 // On s'en sert dans api/articles/index.js
+// Utilisation du mot cle function pour avoir acces au mot cle this
 ArticleSchema.statics.getDates = async function () {
     return await this.aggregate([
         { $project: { month: { $substr: ['$createdAt', 0, 7] } } },
