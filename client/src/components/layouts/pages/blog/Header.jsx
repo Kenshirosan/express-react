@@ -77,13 +77,13 @@ const Header = () => {
                             >
                                 Logout
                             </NavLink>
-                        )}
-                        {'   '}
-                        <NavLink className="link-primary mx-3" to="/steps">
+                        )}{' '}
+                        <NavLink
+                            className="link-primary mx-3"
+                            exact
+                            to="/steps"
+                        >
                             étapes de création du blog
-                        </NavLink>
-                        <NavLink className="link-success mx-3" to="/test">
-                            Infos Utiles
                         </NavLink>
                     </div>
                 </div>

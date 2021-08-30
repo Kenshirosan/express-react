@@ -18,6 +18,7 @@ import Steps from './components/layouts/pages/blog/Steps';
 import { HopefullyUsefullInfos } from './components/layouts/pages/blog/HopefullyUsefullInfos';
 import CreateRoles from './components/layouts/pages/dashboard/CreateRoles';
 import { fetchData } from './utilities';
+import StepsLinks from './components/layouts/pages/blog/StepsLinks';
 
 const App = () => {
     // Penser au composant 404 NotFound, ou un composant qui gère les erreurs HTTP
@@ -45,11 +46,12 @@ const App = () => {
                         path="/featured/:id"
                         component={ArticleOfTheDayComponent}
                     />
-                    <PublicRoute path="/steps" component={Steps} />
+                    <PublicRoute exact path="/steps" component={StepsLinks} />
                     <PublicRoute
-                        path="/test"
+                        path="/steps/infos"
                         component={HopefullyUsefullInfos}
                     />
+                    <PublicRoute exact path="/steps/:steps" component={Steps} />
                     {/* Route privées */}
                     <PrivateRoute
                         exact

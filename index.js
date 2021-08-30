@@ -39,7 +39,7 @@ app.use('/api/roles/destroy', require('./routes/api/roles/destroy'));
 
 // Parse markdown to HTML
 app.use('/api/steps', require('./routes/api/steps'));
-app.use('/api/test', require('./routes/api/steps/test'));
+
 const port = process.env.PORT || 5000;
 
 app.listen(port);

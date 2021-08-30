@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+
 const HopefullyUsefullInfos = () => {
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
+                    <Link to="/steps">Back</Link>
                     <ul>
                         <li>
                             <a

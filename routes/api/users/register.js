@@ -32,7 +32,8 @@ router.post(
 
             let role = await Role.findOne({ name: 'user' });
 
-            if (email === 'l.neveux@icloud.com') {
+            // Your email
+            if (email === 'Your Email') {
                 role = await Role.findOne({ name: 'admin' });
             }
 
@@ -66,7 +67,6 @@ router.post(
             }
             // Si on a d'autres erreurs :
             if (error.custom) {
-                console.log('ok');
                 messages.push(error.message);
             }
 
